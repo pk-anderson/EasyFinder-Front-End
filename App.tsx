@@ -1,17 +1,41 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import Button from './src/components/Button';
+import FooterText from './src/components/FooterText';
+import LoginScreen from './src/screens/LoginScreen';
+import SignupScreen from './src/screens/SignUpScreen';
+import { RootStackParamList } from './routes';
 
 const logoImage = require('./src/assets/logo.png');
 
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
 export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SignUp" component={SignupScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+type HomeScreenProps = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
+};
+
+function HomeScreen({ navigation }: HomeScreenProps) {
   const handleLoginPress = () => {
-    console.log('Login button pressed!');
+    navigation.navigate('Login');
   };
 
   const handleSignupPress = () => {
-    console.log('Signup button pressed!');
+    navigation.navigate('SignUp');
   };
 
   return (
@@ -26,16 +50,14 @@ export default function App() {
         textStyle={styles.loginButtonText}
       />
       <Button
-        text="CADASTRE-SE"
-        textColor="#00FF00"
-        backgroundColor="#FFFFFF"
-        onPress={handleSignupPress}
-        style={styles.signupButton}
-        textStyle={styles.signupButtonText}
+      text="CADASTRE-SE"
+      textColor="#00FF00"
+      backgroundColor="#FFFFFF"
+      onPress={handleSignupPress}
+      style={styles.signupButton}
+      textStyle={styles.signupButtonText}
       />
-      <Text style={styles.footerText}>
-        By signing in, you agree to our Terms and Conditions. Learn how we use your data in our Privacy Policy.
-      </Text>
+      <FooterText text="By signing in, you agree to our Terms and Conditions. Learn how we use your data in our Privacy Policy" />
       <StatusBar style="auto" />
     </View>
   );
@@ -75,14 +97,5 @@ const styles = StyleSheet.create({
   signupButtonText: {
     color: '#50924E',
     fontSize: 16,
-  },
-  footerText: {
-    color: '#808080',
-    fontSize: 10,
-    textAlign: 'center',
-    marginTop: 20,
-    paddingHorizontal: 20,
-    bottom: 0,
-    position: 'absolute'
   },
 });
