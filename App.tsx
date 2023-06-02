@@ -8,6 +8,7 @@ import FooterText from './src/components/FooterText';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignUpScreen';
 import { RootStackParamList } from './routes';
+import DashboardScreen from './src/screens/DashBoard';
 
 const logoImage = require('./src/assets/logo.png');
 
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignupScreen} />
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

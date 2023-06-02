@@ -15,6 +15,7 @@ type LoginScreenProps = {
 function LoginScreen({ navigation }: LoginScreenProps) {
   const handleLoginPress = () => {
     console.log('Login button pressed!');
+    navigation.navigate('Dashboard')
   };
 
   const handleSignupPress = () => {
