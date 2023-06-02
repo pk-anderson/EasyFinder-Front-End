@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     containerTop:{
        display: 'flex',
        flexDirection: 'row',
-       top: '5%',
+       
        justifyContent: 'center',      
     },
     logo: {
