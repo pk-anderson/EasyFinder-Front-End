@@ -1,17 +1,7 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { deviceDimensions } from "../../global/dimesion";
-import menuImg from '../../assets/menu-aberto.png'
 
-
-export default function AppTopBar(){
-return(
-    <View style={styles.containerTop}>
-    <Image source={menuImg} style={styles.menu}/>
-    <Text style={styles.logo}>LOGO</Text>
-</View>
-)
-}
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     containerTop:{
        display: 'flex',
        flexDirection: 'row',
