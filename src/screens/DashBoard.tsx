@@ -10,7 +10,6 @@ import estojoImg from '../assets/image(1).png'
 import iphoneImg from '../assets/image(2).png'
 import { FlatList } from "react-native";
 
-
 const mockedData = [
     {
         title :'Garrafa Termica',
