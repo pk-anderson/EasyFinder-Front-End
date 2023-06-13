@@ -29,6 +29,66 @@ const mockedData = [
         img: iphoneImg,
         date: 'Sexta-Feira'
     },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
+    {
+        title :'Estojo escolar',
+        content :'Encontrei esse estojo perto do ...',
+        img: estojoImg,
+        date: 'Segunda-Feira'
+    },
 ]
 
 type DashboardScreenProps = {
@@ -41,7 +101,7 @@ export default function DashboardScreen({ navigation }: DashboardScreenProps){
         <BaseScreen children={[
           <View style={style.container}>
             <AppTopBar />
-            <View style={{height:30}}></View>
+            <View style={{height:0}}></View>
             <SearchBar />
           </View>,
           <FlatList data={mockedData} renderItem={({item}) =><Item title={item.title} content={item.content} img={item.img} date={item.date}/>}/>

@@ -12,7 +12,7 @@ interface IProps {
 
 export default function BaseScreen({children} :IProps){
     return (
-          <LinearGradient style={styles.containerScreen} colors={[globalColors.primaryColor,globalColors.secondaryColor]} start={{x:0.1,y:0}}  end={{x: 1,y:0}}>
+          <LinearGradient style={styles.containerScreen} colors={[globalColors.mainColor,globalColors.mainColor]} start={{x:0.1,y:0}}  end={{x: 1,y:0}}>
             {children[0]}
             <View style={styles.bodyTemplate}>{children[1]}</View>
           </LinearGradient>

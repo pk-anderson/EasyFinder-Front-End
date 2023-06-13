@@ -50,6 +50,9 @@ const AppTopBar: React.FC<AppTopBarProps> = () => {
           <TouchableOpacity style={styles.menuItem} onPress={handleLogout}>
             <Text style={styles.menuItemText}>Logout</Text>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.menuItem} onPress={handleMenuToggle}>
+            <Text style={styles.menuItemText}>Fechar</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
       
