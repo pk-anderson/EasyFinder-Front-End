@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ReactNode } from "react";
 import { View } from "react-native";
 import { deviceDimensions } from "../global/dimesion";
+import React from "react";
 
 interface IProps {
     children: ReactNode[]
@@ -12,7 +13,7 @@ interface IProps {
 
 export default function BaseScreen({children} :IProps){
     return (
-          <LinearGradient style={styles.containerScreen} colors={[globalColors.mainColor,globalColors.mainColor]} start={{x:0.1,y:0}}  end={{x: 1,y:0}}>
+          <LinearGradient style={styles.containerScreen} colors={[globalColors.mainColor,globalColors.secondaryColor]} start={{x:0.1,y:0}}  end={{x: 1,y:0}}>
             {children[0]}
             <View style={styles.bodyTemplate}>{children[1]}</View>
           </LinearGradient>

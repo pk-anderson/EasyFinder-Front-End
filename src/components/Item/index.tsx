@@ -1,5 +1,6 @@
 import { Image, ImageSourcePropType, Text, View } from "react-native";
 import { styles } from "./style";
+import React from "react";
 
 interface IProps {
     title :string,
