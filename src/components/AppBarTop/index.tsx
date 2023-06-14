@@ -8,6 +8,8 @@ type AppTopBarProps = {
   // Adicione as propriedades necessárias
 };
 
+
+
 const AppTopBar: React.FC<AppTopBarProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -24,6 +26,8 @@ const AppTopBar: React.FC<AppTopBarProps> = () => {
     // Lógica para realizar o logout
     console.log('Logout');
   };
+  
+  
 
   return (
     <View style={styles.containerTop}>

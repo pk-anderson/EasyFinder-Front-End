@@ -10,6 +10,7 @@ import estojoImg from '../assets/image(1).png'
 import iphoneImg from '../assets/image(2).png'
 import { FlatList } from "react-native";
 import React from "react";
+import Button from "../components/Button";
 
 const mockedData = [
     {
@@ -103,15 +104,25 @@ export default function DashboardScreen({ navigation }: DashboardScreenProps){
        console.log(item.id.toString())
        return item.id.toString()
     };
+
+    const handleItemPress = () => {
+        console.log('LostItem button pressed!');
+        navigation.navigate('LostItem')
+      };
+    
     return (
         <BaseScreen children={[
           <View style={style.container} key={"topContent"}>
             <AppTopBar />
+            <Button onPress={handleItemPress} text="Ver Item"></Button>
             <View style={{height:0}}></View>
+            
             <SearchBar />
           </View>,
           <FlatList key={"BodyContent"} keyExtractor={keyExtractor}  data={mockedData} renderItem={({item}) => <Item key={item.id.toString()} title={item.title} content={item.content} img={item.img} date={item.date} />}
           />
+          
+          
        ]
        }/>
     )

@@ -11,8 +11,9 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
+    "@types/styled-components": "^5.1.26",
     "axios": "^1.4.0",
-    "expo": "~48.0.15",
+    "expo": "^46.0.21",
     "expo-linear-gradient": "~12.1.2",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
