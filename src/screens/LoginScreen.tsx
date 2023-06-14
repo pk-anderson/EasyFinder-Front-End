@@ -1,10 +1,12 @@
-import React from 'react';
-import { StyleSheet, View, Image, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, TextInput, Alert } from 'react-native';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import FooterText from '../components/FooterText';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
+import { VerifyLoginFields } from '../util/VerifyLoginFields';
+import { userLogin } from '../api/user/Login';
 
 const logoImage = require('../assets/logo.png');
 
@@ -13,11 +15,21 @@ type LoginScreenProps = {
 };
 
 function LoginScreen({ navigation }: LoginScreenProps) {
-  const handleLoginPress = () => {
-    console.log('Login button pressed!');
-    navigation.navigate('Dashboard')
+  const [inputEmail, setEmail] = useState('');
+  const [inputPassword, setPassword] = useState('');
+  const handleLoginPress = async () => {
+   let isValid = VerifyLoginFields(inputEmail, inputPassword)
+   if(isValid == undefined) return isValid
+    let isLogged = await userLogin(inputEmail, inputPassword)
+    if(isLogged.has_error){
+      return Alert.alert(
+        "Falha no Login",
+        isLogged.data
+      );  
+    }else{
+      navigation.navigate('Dashboard')
+    }
   };
-
   const handleSignupPress = () => {
     navigation.navigate('SignUp');
   };
@@ -26,10 +38,12 @@ function LoginScreen({ navigation }: LoginScreenProps) {
     <View style={styles.container}>
       <Image source={logoImage} style={styles.logo} />
       <Input
-        placeholder="Nome de usuário"
+        onChangeText={text => setEmail(text)}
+        placeholder="E-mail"
         style={styles.input}
       />
       <Input
+        onChangeText={text => setPassword(text)}
         placeholder="Senha"
         secureTextEntry
         style={styles.input}
