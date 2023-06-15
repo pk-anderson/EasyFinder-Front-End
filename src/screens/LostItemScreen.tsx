@@ -4,6 +4,7 @@ import { StyleSheet, View, Image, Text } from "react-native";
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from "../components/ItemPage/index";
 import React from "react";
+import {Entypo, AntDesign, FontAwesome  } from "@expo/vector-icons"
 import ImageSlot from '../assets/ImageSlot.jpg'
 import ItemImg from '../assets/Garrafinha.jpeg'
 
@@ -36,13 +37,13 @@ export default function DashboardScreen({ navigation }: LostItemScreenProps){
               <LstItmHeader>
                 <LstItmHeaderInfo>
                   <HeaderTitle>Garrafa Termica</HeaderTitle>
-                  <HeaderSub>🚩Cajazeiras - PB</HeaderSub>
+                  <HeaderSub><Entypo name="location-pin" size={22} color={"red"}/>Cajazeiras - PB</HeaderSub>
                 </LstItmHeaderInfo>
               </LstItmHeader>
               <StatusView>
                 <StatusLine>
                     <StatusLabel>Status</StatusLabel>
-                    <StatusValue>⛔ Perdido</StatusValue>
+                    <StatusValue><AntDesign name="plussquare" size={20} color={"red"} /> Perdido</StatusValue>
                 </StatusLine>
             </StatusView>
             <StatusView>
@@ -79,7 +80,7 @@ export default function DashboardScreen({ navigation }: LostItemScreenProps){
 
             <StatusView>
               <StatusLine>
-                <ContactBtn><ContactTxt>Entrar em Contato</ContactTxt></ContactBtn>
+                <ContactBtn><ContactTxt><FontAwesome name="whatsapp" size={20} color={"green"}/>Entrar em Contato</ContactTxt></ContactBtn>
               </StatusLine>
             </StatusView>
             
