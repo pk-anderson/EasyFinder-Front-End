@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, Modal, StyleSheet } from 'react-na
 import menuImg from '../../assets/menu-aberto.png';
 import { deviceDimensions } from "../../global/dimesion";
 import { styles } from './style';
+const logoImage = require('../../assets/logo.png');
 
 type AppTopBarProps = {
   // Adicione as propriedades necessárias
@@ -60,7 +61,7 @@ const AppTopBar: React.FC<AppTopBarProps> = () => {
         </View>
       </Modal>
       
-      <Text style={styles.logo}>LOGO</Text>
+      <Image source={logoImage} style={styles.logo} />
     </View>
   );
 }

@@ -46,7 +46,8 @@ export const styles = StyleSheet.create({
         fontSize: 16,
       },
       logo: {
-        color: 'white',
-        fontSize: 30,
+        width: 225,
+        height: 42,
+        marginBottom: 0,
       },
 })

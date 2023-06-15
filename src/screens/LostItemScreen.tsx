@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from "../components/ItemPage/index";
 import React from "react";
@@ -8,8 +8,8 @@ import ImageSlot from '../assets/ImageSlot.jpg'
 import ItemImg from '../assets/Garrafinha.jpeg'
 
 import {LostItemInfoView, LstItmHeaderInfo, LstItmHeader, HeaderSub, HeaderTitle} from '../components/ItemPage/components'
-import {StatusView, StatusLine, StatusLabel, StatusValue} from '../components/ItemPage/components'
-
+import {StatusView, StatusLine, StatusLabel, StatusValue, DescriptionText} from '../components/ItemPage/components'
+import {DescriptionLine, LocationLine, LocationMap, ContactBtn, ContactTxt} from '../components/ItemPage/components'
 
 
 type LostItemScreenProps = {
@@ -45,6 +45,45 @@ export default function DashboardScreen({ navigation }: LostItemScreenProps){
                     <StatusValue>⛔ Perdido</StatusValue>
                 </StatusLine>
             </StatusView>
+            <StatusView>
+                <StatusLine>
+                    <StatusLabel>Contato</StatusLabel>
+                    <StatusValue>(88) 9 9123-4567</StatusValue>
+                    
+                </StatusLine>
+            </StatusView>
+
+            <StatusView>
+                <StatusLine>
+                    <StatusLabel>Descrição</StatusLabel> 
+                </StatusLine>
+
+                <DescriptionLine>
+                  <DescriptionText>Estava no IFPB - Campus Cajazeiras perto do Laboratorio
+                  e encontrei essa garrafinha termica, proximo a sala da Loopis Jr</DescriptionText>
+                    
+                </DescriptionLine>
+            </StatusView>
+
+            <StatusView>
+                <StatusLine>
+                    <StatusLabel>Localização</StatusLabel> 
+                </StatusLine>
+
+                <LocationLine>
+                 <LocationMap></LocationMap>
+                 
+                </LocationLine>
+                
+            </StatusView>
+
+            <StatusView>
+              <StatusLine>
+                <ContactBtn><ContactTxt>Entrar em Contato</ContactTxt></ContactBtn>
+              </StatusLine>
+            </StatusView>
+            
+           
             </LostItemInfoView>
            
           </View>,

@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    width: 250,
-    height: 45,
+    width: 225,
+    height: 42,
     marginBottom: 100,
   },
   input: {

@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { TextProps } from 'react-native';
 
 export const LostItemInfoView = styled.View`
     display: flex;
@@ -59,7 +60,7 @@ export const HeaderSub = styled.Text`
     position: absolute;
     font-weight: 200;
    
-    left: 90px;
+    left: 95px;
     top: -100px;
 `;
 
@@ -86,16 +87,18 @@ export const StatusLine = styled.View`
 
     width: 343px;
     height: 18px;
+    
 
 `;
 
 export const StatusLabel = styled.Text`
-    
+    position: absolute;
+
     font-size: 18px;
     position: absolute;
     font-weight: 200;
    
-    left: 90px;
+    left: 0px;
     top: -100px;
 `;
 
@@ -105,6 +108,80 @@ export const StatusValue = styled.Text`
     position: absolute;
     font-weight: 200;
    
-    left: 90px;
+    left: 238px;
     top: -100px;
+`;
+
+export const DescriptionLine = styled.View`
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 70px;
+    gap: 0px;
+
+
+    
+
+`;
+
+export const DescriptionText = styled.Text`
+    
+    position: absolute;
+    padding-bottom: 100px;
+    font-size: 18px;
+    position: absolute;
+    font-weight: 200;
+    left: 0px;
+    top: -90px;
+    width: 100%;
+    overflow-wrap: break-word;
+`;
+
+export const LocationLine = styled.View`
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 100px;
+    gap: 0px;
+
+
+    
+
+`;
+
+export const LocationMap = styled.View`
+    
+    position: absolute;
+    padding-bottom: 100px;
+    font-size: 18px;
+    position: absolute;
+    font-weight: 200;
+    left: 0px;
+    top: -90px;
+    width: 100%;
+    overflow-wrap: break-word;
+`;
+
+export const ContactBtn = styled.Pressable`
+    position: absolute;
+
+    position: absolute;
+    font-weight: 200;
+
+
+    border: 2px solid #000000;
+    border-radius: 50px;
+   
+    left: 80px;
+    top: -140px;
+`;
+
+export const ContactTxt = styled.Text`
+    font-size: 20px;
+    padding: 5px;
+    font-weight: 200;
 `;

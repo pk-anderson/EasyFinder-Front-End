@@ -133,9 +133,9 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   logo: {
-    width: 200,
-    height: 200,
-    marginBottom: 15,
+    width: 225,
+    height: 42,
+    marginBottom: 25,
   },
   input: {
     width: 250,
