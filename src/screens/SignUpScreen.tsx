@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Image, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, Text, ScrollView, Alert } from 'react-native';
 import axios from 'axios';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import FooterText from '../components/FooterText';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
+import { userCreate } from '../api/user/SignUp';
 
 const logoImage = require('../assets/logo.png');
 
@@ -31,18 +32,34 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
     phoneNumber: '',
     state: '',
     street: '',
-    homeNumber: 0,
+    homeNumber: '',
   });
 
   const handleSignUpPress = async () => {
     try {
       const formattedPhone = formatPhoneNumber(formData.phoneNumber);
       const dataToSend = { ...formData, phoneNumber: formattedPhone };
-      console.log(dataToSend)
-      const response = await axios.post('http://localhost:8080/user', dataToSend);
-      console.log('Cadastro realizado com sucesso!', response.data);
+      console.log(dataToSend);
+      let isCreated = await userCreate(
+        dataToSend.name,
+        dataToSend.password,
+        dataToSend.email,
+        dataToSend.phoneNumber,
+        dataToSend.state,
+        dataToSend.street,
+        dataToSend.homeNumber,
+      );
+      if (isCreated.has_error) {
+        return Alert.alert("Falha no Cadastro", isCreated.data);
+      } else {
+        console.log("Teste")
+        navigation.navigate("Dashboard");
+      }
     } catch (error) {
-      console.error('Erro ao cadastrar:', error);
+      // Trate o erro aqui
+      console.error(error);
+      // Exiba uma mensagem de erro ao usuário, por exemplo:
+      Alert.alert("Erro", "Ocorreu um erro ao processar o cadastro.");
     }
   };
 
@@ -93,12 +110,12 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
         onChangeText={(text) => setFormData({ ...formData, street: text })}
       />
       <Input
-      placeholder={formData.homeNumber === 0 ? 'Número' : ''}
+      placeholder="Número"
       style={styles.input}
       keyboardType="numeric"
-      value={formData.homeNumber === 0 ? '' : formData.homeNumber.toString()}
+      value={formData.homeNumber}
       onChangeText={(text) =>
-        setFormData({ ...formData, homeNumber: parseInt(text) || 0 })
+        setFormData({ ...formData, homeNumber: text })
       }
     />
 
