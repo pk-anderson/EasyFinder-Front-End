@@ -12,7 +12,7 @@ export const style = StyleSheet.create({
         width: deviceDimensions().width * 0.9,
         height: deviceDimensions().height * 0.06,
         top: '2%',
-        left: deviceDimensions().width * 0.05
+        left: deviceDimensions().width * 0.05,
     },
     textInput:{
      padding:10,

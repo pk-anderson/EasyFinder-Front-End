@@ -1,108 +1,120 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
-import { StyleSheet, View, Image, Text } from "react-native";
+import { StyleSheet, View, Image, Text, ImageSourcePropType } from "react-native";
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from "../components/ItemPage/index";
 import React from "react";
-import {Entypo, AntDesign, FontAwesome  } from "@expo/vector-icons"
-import ImageSlot from '../assets/ImageSlot.jpg'
-import ItemImg from '../assets/Garrafinha.jpeg'
-
-import {LostItemInfoView, LstItmHeaderInfo, LstItmHeader, HeaderSub, HeaderTitle} from '../components/ItemPage/components'
-import {StatusView, StatusLine, StatusLabel, StatusValue, DescriptionText} from '../components/ItemPage/components'
-import {DescriptionLine, LocationLine, LocationMap, ContactBtn, ContactTxt} from '../components/ItemPage/components'
-
+import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
+import {
+  LostItemInfoView,
+  LstItmHeaderInfo,
+  LstItmHeader,
+  HeaderSub,
+  HeaderTitle,
+} from "../components/ItemPage/components";
+import {
+  StatusView,
+  StatusLine,
+  StatusLabel,
+  StatusValue,
+  DescriptionText,
+} from "../components/ItemPage/components";
+import {
+  DescriptionLine,
+  LocationLine,
+  LocationMap,
+  ContactBtn,
+  ContactTxt,
+} from "../components/ItemPage/components";
+import { RouteProp } from "@react-navigation/native";
 
 type LostItemScreenProps = {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'LostItem'>;
+  navigation: NativeStackNavigationProp<RootStackParamList, 'LostItem'>;
+  route: RouteProp<RootStackParamList, 'LostItem'>;
+};
+
+const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
+  const { title, status, description, contact, imagePath } = route.params;
+
+  const handleBack = () => {
+    navigation.navigate('Home');
   };
 
-
-
-export default function DashboardScreen({ navigation }: LostItemScreenProps){
-    const handleBack = () => {
-        navigation.navigate('Home');
-    };
-    return (
-        <>
-        <BaseScreen children={[
+  return (
+    <>
+      <BaseScreen
+        children={[
           <View style={styles.container} key={"topContent"}>
             <ItemTopBar />
-            
-            
           </View>,
           <View key={"BodyContent"}>
-            <Image source={ItemImg} style={styles.lostItemImg}/>
+            {imagePath ? (
+              <Image source={imagePath} style={styles.lostItemImg} />
+            ) : null}
             <LostItemInfoView>
               <LstItmHeader>
                 <LstItmHeaderInfo>
-                  <HeaderTitle>Garrafa Termica</HeaderTitle>
-                  <HeaderSub><Entypo name="location-pin" size={22} color={"red"}/>Cajazeiras - PB</HeaderSub>
+                  <HeaderTitle>{title}</HeaderTitle>
+                  <HeaderSub>
+                    <Entypo name="location-pin" size={22} color={"red"} />
+                    Cajazeiras - PB
+                  </HeaderSub>
                 </LstItmHeaderInfo>
               </LstItmHeader>
               <StatusView>
                 <StatusLine>
-                    <StatusLabel>Status</StatusLabel>
-                    <StatusValue><AntDesign name="plussquare" size={20} color={"red"} /> Perdido</StatusValue>
+                  <StatusLabel>Status</StatusLabel>
+                  <StatusValue>
+                    <AntDesign name="plussquare" size={20} color={"red"} />{" "}
+                    {status}
+                  </StatusValue>
                 </StatusLine>
-            </StatusView>
-            <StatusView>
+              </StatusView>
+              <StatusView>
                 <StatusLine>
-                    <StatusLabel>Contato</StatusLabel>
-                    <StatusValue>(88) 9 9123-4567</StatusValue>
-                    
+                  <StatusLabel>Contato</StatusLabel>
+                  <StatusValue>{contact}</StatusValue>
                 </StatusLine>
-            </StatusView>
-
-            <StatusView>
+              </StatusView>
+              <StatusView>
                 <StatusLine>
-                    <StatusLabel>Descrição</StatusLabel> 
+                  <StatusLabel>Descrição</StatusLabel>
                 </StatusLine>
-
                 <DescriptionLine>
-                  <DescriptionText>Estava no IFPB - Campus Cajazeiras perto do Laboratorio
-                  e encontrei essa garrafinha termica, proximo a sala da Loopis Jr</DescriptionText>
-                    
+                  <DescriptionText>{description}</DescriptionText>
                 </DescriptionLine>
-            </StatusView>
-
-            <StatusView>
+              </StatusView>
+              <StatusView>
                 <StatusLine>
-                    <StatusLabel>Localização</StatusLabel> 
+                  <StatusLabel>Localização</StatusLabel>
                 </StatusLine>
-
                 <LocationLine>
-                 <LocationMap></LocationMap>
-                 
+                  <LocationMap></LocationMap>
                 </LocationLine>
-                
-            </StatusView>
-
-            <StatusView>
-              <StatusLine>
-                <ContactBtn><ContactTxt><FontAwesome name="whatsapp" size={20} color={"green"}/>Entrar em Contato</ContactTxt></ContactBtn>
-              </StatusLine>
-            </StatusView>
-            
-           
+              </StatusView>
+              <StatusView>
+                <StatusLine>
+                  <ContactBtn>
+                    <ContactTxt>
+                      <FontAwesome name="whatsapp" size={20} color={"green"} />
+                      Entrar em Contato
+                    </ContactTxt>
+                  </ContactBtn>
+                </StatusLine>
+              </StatusView>
             </LostItemInfoView>
-           
           </View>,
-          
-          
-          
-       ]
-       }/>
-       
-       </>
-    )
+        ]}
+      />
+    </>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display:'flex',
-    top:'5%',
-    flexDirection:'column',
+    display: "flex",
+    top: "5%",
+    flexDirection: "column",
     paddingTop: 10,
   },
   tinyLogo: {
@@ -116,8 +128,10 @@ const styles = StyleSheet.create({
   lostItemImg: {
     width: 250,
     height: 250,
-    position: 'absolute',
+    position: "absolute",
     left: 55,
-    top:2
-  }
+    top: 2,
+  },
 });
+
+export default LostItemScreen;

@@ -8,7 +8,7 @@ import Item from "../components/Item";
 import copoImg from '../assets/image.png'
 import estojoImg from '../assets/image(1).png'
 import iphoneImg from '../assets/image(2).png'
-import { FlatList } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import React from "react";
 import Button from "../components/Button";
 
@@ -34,103 +34,56 @@ const mockedData = [
         img: iphoneImg,
         date: 'Sexta-Feira'
     },
-    {
-        id: 4,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
-    {
-        id: 5,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
-    {
-        id: 6,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
+];
 
-    {
-        id: 8,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
-    {
-        id:9,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
-    {
-        id:10,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
-    {
-        id:11,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
-    {
-        id:12,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
- 
-]
+const contact = "88993847841"
+const status = "Perdido"
 
 type DashboardScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'Dashboard'>;
-  };
+};
 
+export default function DashboardScreen({ navigation }: DashboardScreenProps) {
+    const keyExtractor = (item: any) => item.id.toString();
 
-export default function DashboardScreen({ navigation }: DashboardScreenProps){
-    const keyExtractor = (item :any) => {
-       console.log(item.id.toString())
-       return item.id.toString()
-    };
-
-    const handleItemPress = () => {
-        console.log('LostItem button pressed!');
-        navigation.navigate('LostItem')
+    const handleItemPress = (item: any, status: string, contact: string) => {
+        navigation.navigate("LostItem", {
+          title: item.title,
+          status: status,
+          description: item.content,
+          contact: contact,
+          imagePath: item.img,
+        });
       };
-    
+
+    const renderItem = ({ item }: { item: any }) => (
+        <TouchableOpacity onPress={() => handleItemPress(item, status, contact)}>
+            <Item key={item.id.toString()} title={item.title} content={item.content} img={item.img} date={item.date} />
+        </TouchableOpacity>
+    );
+
     return (
         <BaseScreen children={[
-          <View style={style.container} key={"topContent"}>
-            <AppTopBar />
-            <Button onPress={handleItemPress} text="Ver Item"></Button>
-            <View style={{height:0}}></View>
-            
-            <SearchBar />
-          </View>,
-          <FlatList key={"BodyContent"} keyExtractor={keyExtractor}  data={mockedData} renderItem={({item}) => <Item key={item.id.toString()} title={item.title} content={item.content} img={item.img} date={item.date} />}
-          />
-          
-          
-       ]
-       }/>
-    )
+            <View style={styles.container} key={"topContent"}>
+                <AppTopBar />
+                {/* <Button onPress={handleItemPress} text="Ver Item" /> */}
+                <View style={{ height: 0 }}></View>
+                <SearchBar />
+            </View>,
+            <FlatList
+                key={"BodyContent"}
+                keyExtractor={keyExtractor}
+                data={mockedData}
+                renderItem={renderItem}
+            />
+        ]} />
+    );
 }
-const style = StyleSheet.create({
-    container:{
-        display:'flex',
-        top:'5%',
-        flexDirection:'column'
+
+const styles = StyleSheet.create({
+    container: {
+        display: 'flex',
+        top: '5%',
+        flexDirection: 'column'
     }
-})
+});
