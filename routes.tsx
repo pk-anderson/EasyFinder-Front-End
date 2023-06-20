@@ -12,4 +12,5 @@ export type RootStackParamList = {
     contact: string;
     imagePath?: ImageSourcePropType;
   };
+  RegisterItem: undefined;
 };

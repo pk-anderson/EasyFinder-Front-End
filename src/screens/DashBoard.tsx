@@ -45,40 +45,35 @@ type DashboardScreenProps = {
 
 export default function DashboardScreen({ navigation }: DashboardScreenProps) {
     const keyExtractor = (item: any) => item.id.toString();
-
+  
     const handleItemPress = (item: any, status: string, contact: string) => {
-        navigation.navigate("LostItem", {
-          title: item.title,
-          status: status,
-          description: item.content,
-          contact: contact,
-          imagePath: item.img,
-        });
-      };
-
+      navigation.navigate("LostItem", {
+        title: item.title,
+        status: status,
+        description: item.content,
+        contact: contact,
+        imagePath: item.img,
+      });
+    };
+  
     const renderItem = ({ item }: { item: any }) => (
-        <TouchableOpacity onPress={() => handleItemPress(item, status, contact)}>
-            <Item key={item.id.toString()} title={item.title} content={item.content} img={item.img} date={item.date} />
-        </TouchableOpacity>
+      <TouchableOpacity onPress={() => handleItemPress(item, status, contact)}>
+        <Item key={item.id.toString()} title={item.title} content={item.content} img={item.img} date={item.date} />
+      </TouchableOpacity>
     );
-
+  
     return (
-        <BaseScreen children={[
-            <View style={styles.container} key={"topContent"}>
-                <AppTopBar />
-                {/* <Button onPress={handleItemPress} text="Ver Item" /> */}
-                <View style={{ height: 0 }}></View>
-                <SearchBar />
-            </View>,
-            <FlatList
-                key={"BodyContent"}
-                keyExtractor={keyExtractor}
-                data={mockedData}
-                renderItem={renderItem}
-            />
-        ]} />
+      <BaseScreen>
+        <View style={styles.container}>
+          <AppTopBar navigation={navigation} />
+          <View style={{ height: 0 }}></View>
+          <SearchBar />
+        </View>
+        <FlatList keyExtractor={keyExtractor} data={mockedData} renderItem={renderItem} />
+      </BaseScreen>
     );
-}
+  }
+  
 
 const styles = StyleSheet.create({
     container: {

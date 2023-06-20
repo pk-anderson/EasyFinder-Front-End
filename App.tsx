@@ -10,6 +10,7 @@ import SignupScreen from './src/screens/SignUpScreen';
 import { RootStackParamList } from './routes';
 import DashboardScreen from './src/screens/DashBoard';
 import LostItemScreen from './src/screens/LostItemScreen'
+import RegisterItemScreen from './src/screens/RegisterItem';
 
 const logoImage = require('./src/assets/logo.png');
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignupScreen} />
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen name="LostItem" component={LostItemScreen} />
+        <Stack.Screen name="RegisterItem" component={RegisterItemScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

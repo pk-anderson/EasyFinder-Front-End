@@ -4,14 +4,16 @@ import menuImg from '../../assets/menu-aberto.png';
 import { deviceDimensions } from "../../global/dimesion";
 import { styles } from './style';
 const logoImage = require('../../assets/logo.png');
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from "../../../routes";
 
 type AppTopBarProps = {
-  // Adicione as propriedades necessárias
+  navigation: NativeStackNavigationProp<RootStackParamList, 'Dashboard'>;
 };
 
 
 
-const AppTopBar: React.FC<AppTopBarProps> = () => {
+const AppTopBar: React.FC<AppTopBarProps> = ({ navigation }) => { 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
@@ -28,6 +30,9 @@ const AppTopBar: React.FC<AppTopBarProps> = () => {
     console.log('Logout');
   };
   
+  const handleRegisterItem = () => {
+    navigation.navigate('RegisterItem');
+  };
   
 
   return (
@@ -50,6 +55,10 @@ const AppTopBar: React.FC<AppTopBarProps> = () => {
 
           <TouchableOpacity style={styles.menuItem} onPress={handleEditProfile}>
             <Text style={styles.menuItemText}>Visualizar Perfil</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItem} onPress={handleRegisterItem}>
+            <Text style={styles.menuItemText}>Cadastrar Item</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem} onPress={handleLogout}>
