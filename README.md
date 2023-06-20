@@ -21,7 +21,7 @@ npx expo start
 
 <h5>Protipo da Aplicação (FIGMA)</h5>
 <img style="height:100px" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png">
-<a href="[https://www.python.org/downloads/](https://www.figma.com/file/Xpws2MlJQB5UgqTMW9M4ew/Easy-Finder?type=design&node-id=0%3A1&t=NQMjafGeqrTwnxSQ-1)" target="_blank"><img src="https://img.shields.io/badge/Visualizar-Prototipo-blue"></img></a> 
+<a href="https://www.figma.com/file/Xpws2MlJQB5UgqTMW9M4ew/Easy-Finder?type=design&node-id=0%3A1&t=NQMjafGeqrTwnxSQ-1" target="_blank"><img src="https://img.shields.io/badge/Visualizar-Prototipo-blue"></img></a> 
 
 
 
