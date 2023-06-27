@@ -11,9 +11,10 @@ export async function userLogin(email:string, password:string) {
         password: password,
       }),
     })
-    let result = request.json()
-    console.log(result)
-    return result 
+    let result = await request.json()
+    let authorization = request.headers.get('authorization');
+  
+    return { result, authorization }
     } catch (error) {
        console.log(error) 
     }

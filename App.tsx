@@ -11,6 +11,7 @@ import { RootStackParamList } from './routes';
 import DashboardScreen from './src/screens/DashBoard';
 import LostItemScreen from './src/screens/LostItemScreen'
 import RegisterItemScreen from './src/screens/RegisterItem';
+import { AuthProvider } from './AuthContext';
 
 const logoImage = require('./src/assets/logo.png');
 
@@ -18,6 +19,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
+    <AuthProvider>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -28,6 +30,7 @@ export default function App() {
         <Stack.Screen name="RegisterItem" component={RegisterItemScreen} />
       </Stack.Navigator>
     </NavigationContainer>
+    </AuthProvider>
   );
 }
 
