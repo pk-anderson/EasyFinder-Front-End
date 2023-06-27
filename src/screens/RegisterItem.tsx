@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from '../components/ItemPage';
+import ImageUploadField from '../components/UploadImage';
 
 interface Props {
   // Defina as propriedades necessárias para a página aqui
@@ -10,6 +11,7 @@ interface Props {
 const RegisterItemScreen: React.FC<Props> = () => {
   const [productName, setProductName] = useState('');
   const [productDescription, setProductDescription] = useState('');
+  const [productLocalization, setProductLocalization] = useState('');
   
   return (
     <BaseScreen
@@ -33,6 +35,13 @@ const RegisterItemScreen: React.FC<Props> = () => {
             multiline
           />
           <Text style={styles.text}>{'\n'}LOCAL QUE O VIU PELA ULTIMA VEZ{'\n'}</Text>
+          <TextInput
+            style={styles.input}
+            value={productLocalization}
+            onChangeText={text => setProductLocalization(text)}
+            multiline
+          />
+          <ImageUploadField />
         </View>,
       ]}
     />
