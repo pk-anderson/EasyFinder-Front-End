@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Image, TextInput, Alert } from 'react-native';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -7,8 +7,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
 import { VerifyLoginFields } from '../util/VerifyLoginFields';
 import { userLogin } from '../api/user/Login';
+import { AuthContext } from '../../AuthContext';
 
 const logoImage = require('../assets/logo.png');
+
+
+
 
 type LoginScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
@@ -17,19 +21,29 @@ type LoginScreenProps = {
 function LoginScreen({ navigation }: LoginScreenProps) {
   const [inputEmail, setEmail] = useState('');
   const [inputPassword, setPassword] = useState('');
+  const { setToken } = useContext(AuthContext);
+  
   const handleLoginPress = async () => {
-   let isValid = VerifyLoginFields(inputEmail, inputPassword)
-   if(isValid == undefined) return isValid
-    let isLogged = await userLogin(inputEmail, inputPassword)
-    if(isLogged.has_error){
-      return Alert.alert(
-        "Falha no Login",
-        isLogged.data
-      );  
-    }else{
-      navigation.navigate('Dashboard')
+    let isValid = VerifyLoginFields(inputEmail, inputPassword);
+    if (isValid === undefined) return isValid;
+
+    try {
+      let response = await userLogin(inputEmail, inputPassword);
+      if (response) {
+        let { result, authorization } = response;
+
+        if (result && result.has_error) {
+          Alert.alert("Falha no Login", result.data);
+        } else {
+          setToken(authorization);
+          navigation.navigate('Dashboard')
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
   const handleSignupPress = () => {
     navigation.navigate('SignUp');
   };
@@ -88,7 +102,6 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     paddingHorizontal: 10,
     borderWidth: 1,
-
     borderRadius: 20,
   },
   loginButton: {

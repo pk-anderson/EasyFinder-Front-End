@@ -9,8 +9,9 @@ import copoImg from '../assets/image.png'
 import estojoImg from '../assets/image(1).png'
 import iphoneImg from '../assets/image(2).png'
 import { FlatList, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../components/Button";
+import { AuthContext } from '../../AuthContext';
 
 const mockedData = [
     {
@@ -45,6 +46,7 @@ type DashboardScreenProps = {
 
 export default function DashboardScreen({ navigation }: DashboardScreenProps) {
     const keyExtractor = (item: any) => item.id.toString();
+    const { token } = useContext(AuthContext);
   
     const handleItemPress = (item: any, status: string, contact: string) => {
       navigation.navigate("LostItem", {
