@@ -1,27 +1,72 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import BaseScreen from "./BaseScreen";
+import ItemTopBar from '../components/ItemPage';
+import ImageUploadField from '../components/UploadImage';
 
 interface Props {
   // Defina as propriedades necessárias para a página aqui
 }
 
 const RegisterItemScreen: React.FC<Props> = () => {
+  const [productName, setProductName] = useState('');
+  const [productDescription, setProductDescription] = useState('');
+  const [productLocalization, setProductLocalization] = useState('');
+  
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Teste de Navegação</Text>
-    </View>
+    <BaseScreen
+      children={[
+        <View style={styles.container} key={"topContent"}>
+          <ItemTopBar />
+        </View>,
+        <View key={"BodyContent"} style={styles.container}>
+          <Text style={styles.tittle}>Dados do Produto{'\n'}</Text>
+          <Text style={styles.text}>PRODUTO{'\n'}</Text>
+          <TextInput
+            style={styles.input}
+            value={productName}
+            onChangeText={text => setProductName(text)}
+          />
+          <Text style={styles.text}>{'\n'}DESCRIÇÃO{'\n'}</Text>
+          <TextInput
+            style={styles.input}
+            value={productDescription}
+            onChangeText={text => setProductDescription(text)}
+            multiline
+          />
+          <Text style={styles.text}>{'\n'}LOCAL QUE O VIU PELA ULTIMA VEZ{'\n'}</Text>
+          <TextInput
+            style={styles.input}
+            value={productLocalization}
+            onChangeText={text => setProductLocalization(text)}
+            multiline
+          />
+          <ImageUploadField />
+        </View>,
+      ]}
+    />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 16,
   },
-  text: {
+  tittle: {
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  text: {
+    fontSize: 16,
+    color: '#6F6F6F',
+  },
+  input: {
+    borderWidth: 1.5,
+    borderColor: '#6F6F6F',
+    borderRadius: 4,
+    padding: 8,
+    marginBottom: 16,
   },
 });
 
