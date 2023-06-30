@@ -12,6 +12,7 @@ import DashboardScreen from './src/screens/DashBoard';
 import LostItemScreen from './src/screens/LostItemScreen'
 import RegisterItemScreen from './src/screens/RegisterItem';
 import { AuthProvider } from './AuthContext';
+import ProfileScreen from './src/screens/ProfileScreen';
 
 const logoImage = require('./src/assets/logo.png');
 
@@ -28,6 +29,7 @@ export default function App() {
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen name="LostItem" component={LostItemScreen} />
         <Stack.Screen name="RegisterItem" component={RegisterItemScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     </AuthProvider>

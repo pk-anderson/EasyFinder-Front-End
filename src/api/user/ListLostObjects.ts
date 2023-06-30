@@ -7,12 +7,10 @@ export async function listLostObjects(token: string) {
           Authorization: `Bearer ${token}` 
         },
       });
-  
-      if (!response.ok) {
-        throw new Error('Erro na requisição');
-      }
+      console.log(response)
   
       const data = await response.json();
+      console.log(data)
       return data.data;
     } catch (error) {
       console.log(error);

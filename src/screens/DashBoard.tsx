@@ -12,6 +12,7 @@ import { FlatList, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
 import Button from "../components/Button";
 import { AuthContext } from '../../AuthContext';
+import { listLostObjects } from '../api/user/ListLostObjects';
 
 const mockedData = [
     {

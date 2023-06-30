@@ -20,9 +20,8 @@ const AppTopBar: React.FC<AppTopBarProps> = ({ navigation }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleEditProfile = () => {
-    // Lógica para realizar o logout
-    console.log('Edit Profile');
+  const handleSeeProfile = () => {
+    navigation.navigate('Profile')
   };
 
   const handleLogout = () => {
@@ -53,7 +52,7 @@ const AppTopBar: React.FC<AppTopBarProps> = ({ navigation }) => {
             <Text style={styles.menuItemText}>Voltar ao Início</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuItem} onPress={handleEditProfile}>
+          <TouchableOpacity style={styles.menuItem} onPress={handleSeeProfile}>
             <Text style={styles.menuItemText}>Visualizar Perfil</Text>
           </TouchableOpacity>
 

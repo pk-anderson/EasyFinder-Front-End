@@ -13,4 +13,5 @@ export type RootStackParamList = {
     imagePath?: ImageSourcePropType;
   };
   RegisterItem: undefined;
+  Profile: undefined;
 };
