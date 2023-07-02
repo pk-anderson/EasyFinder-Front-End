@@ -3,7 +3,8 @@ import { RootStackParamList } from "../../routes";
 import { StyleSheet, View, Image, Text, ImageSourcePropType } from "react-native";
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from "../components/ItemPage/index";
-import React from "react";
+import React, {useState} from "react";
+import MapView, {Marker} from 'react-native-maps';
 import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
 import {
   LostItemInfoView,
@@ -40,14 +41,15 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
     navigation.navigate('Home');
   };
 
+
   return (
     <>
       <BaseScreen
         children={[
           <View style={styles.container} key={"topContent"}>
-            <ItemTopBar />
+            <Text style={styles.topText}>{title}</Text>
           </View>,
-          <View key={"BodyContent"}>
+          <View key={"BodyContent"} style={styles.body}>
             {imagePath ? (
               <Image source={imagePath} style={styles.lostItemImg} />
             ) : null}
@@ -88,9 +90,7 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
                 <StatusLine>
                   <StatusLabel>Localização</StatusLabel>
                 </StatusLine>
-                <LocationLine>
-                  <LocationMap></LocationMap>
-                </LocationLine>
+                
               </StatusView>
               <StatusView>
                 <StatusLine>
@@ -102,7 +102,19 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
                   </ContactBtn>
                 </StatusLine>
               </StatusView>
+              
             </LostItemInfoView>
+            <View style={styles.map}>
+              <MapView 
+                style={{ flex: 1}}
+                initialRegion={{
+                  latitude: -6.8883, 
+                  longitude: -38.5591,
+                  latitudeDelta: 0.0095,
+                  longitudeDelta: 0.009
+                }}/>
+            </View>
+            
           </View>,
         ]}
       />
@@ -112,10 +124,14 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    top: "5%",
-    flexDirection: "column",
-    paddingTop: 10,
+    flex: 1,
+    padding: 0,
+    marginBottom: -20
+  },
+  body: {
+    flex: 1,
+    padding: 16,
+    
   },
   tinyLogo: {
     width: 50,
@@ -126,12 +142,23 @@ const styles = StyleSheet.create({
     height: 58,
   },
   lostItemImg: {
-    width: 250,
-    height: 250,
+    width: 220,
+    height: 220,
     position: "absolute",
-    left: 55,
+    left: 65,
     top: 2,
   },
+  topText: {
+    position: 'absolute',
+    top: 0,
+    left: 85,
+    color: 'white',
+    fontSize: 30
+  },
+  map:{
+    marginTop: 480,
+    height: 150,
+  }
 });
 
 export default LostItemScreen;

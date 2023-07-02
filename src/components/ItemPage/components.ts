@@ -12,7 +12,7 @@ export const LostItemInfoView = styled.View`
     width: 343px;
     height: 274px;
     left: 13px;
-    top: 406px;
+    top: 360px;
 `;
 
 export const LstItmHeader = styled.View`
@@ -51,7 +51,7 @@ export const HeaderTitle = styled.Text`
     font-weight: 600;
    
     left: 70px;
-    top: -130px;
+    top: -145px;
 `;
 
 export const HeaderSub = styled.Text`
@@ -61,7 +61,7 @@ export const HeaderSub = styled.Text`
     font-weight: 200;
    
     left: 95px;
-    top: -100px;
+    top: -115px;
 `;
 
 export const StatusView = styled.View`
@@ -99,7 +99,7 @@ export const StatusLabel = styled.Text`
     font-weight: 200;
    
     left: 0px;
-    top: -100px;
+    top: -130px;
 `;
 
 export const StatusValue = styled.Text`
@@ -109,7 +109,7 @@ export const StatusValue = styled.Text`
     font-weight: 200;
    
     left: 238px;
-    top: -100px;
+    top: -130px;
 `;
 
 export const DescriptionLine = styled.View`
@@ -134,7 +134,7 @@ export const DescriptionText = styled.Text`
     position: absolute;
     font-weight: 200;
     left: 0px;
-    top: -90px;
+    top: -120px;
     width: 100%;
     overflow-wrap: break-word;
 `;
@@ -167,7 +167,6 @@ export const LocationMap = styled.View`
 `;
 
 export const ContactBtn = styled.Pressable`
-    position: absolute;
 
     position: absolute;
     font-weight: 200;
@@ -177,7 +176,8 @@ export const ContactBtn = styled.Pressable`
     border-radius: 50px;
    
     left: 80px;
-    top: -140px;
+    z-index: 1;
+    bottom: -45px;
 `;
 
 export const ContactTxt = styled.Text`
