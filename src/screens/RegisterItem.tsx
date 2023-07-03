@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from '../components/ItemPage';
 import ImageUploadField from '../components/UploadImage';
+import CameraField from '../components/TakePicture'
 import MapView, {Marker, LatLng} from 'react-native-maps';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../components/Button';
@@ -105,8 +106,11 @@ const RegisterItemScreen: React.FC<Props> = () => {
             
             </View>
             
-
-            <ImageUploadField />
+            <View >
+              <ImageUploadField  />
+                 
+            </View>
+            
           </ScrollView>
           
           
@@ -162,6 +166,15 @@ const styles = StyleSheet.create({
   scrollView:
   {
     paddingBottom: 100
+  }, 
+  imageCamView:
+  {
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+    
+
   }
 });
 

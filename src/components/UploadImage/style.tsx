@@ -15,6 +15,8 @@ export const style = StyleSheet.create({
       backgroundColor: "#50924E",
       padding: 12,
       borderRadius: 8,
+      marginLeft: 5,
+      marginRight: 5,
     },
     uploadButtonText: {
       color: "#FFFFFF",
