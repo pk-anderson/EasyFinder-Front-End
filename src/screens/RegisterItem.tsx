@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from '../components/ItemPage';
 import ImageUploadField from '../components/UploadImage';
@@ -59,53 +59,56 @@ const RegisterItemScreen: React.FC<Props> = () => {
             <Text style={styles.topText}>Cadastrar Item <Button style={styles.saveBtn} text='Salvar'></Button></Text>
           </View>,
         <View key={"BodyContent"} style={styles.body}>
-          <Text style={styles.tittle}>Dados do Produto{'\n'}</Text>
-          <Text style={styles.text}>PRODUTO{'\n'}</Text>
-          <TextInput
-            style={styles.input}
-            value={productName}
-            onChangeText={text => setProductName(text)}
-          />
-          <Text style={styles.text}>{'\n'}DESCRIÇÃO{'\n'}</Text>
-          <TextInput
-            style={styles.input}
-            value={productDescription}
-            onChangeText={text => setProductDescription(text)}
-            multiline
-          />
-          <Text style={styles.text}>DATA QUE O ENCONTROU</Text>
-          <Button onPress={showDatepicker} text="Informar Data" />
-          {/* date.toLocaleDateString('pt-br') */}
-          <Text>selecionado: {date.toLocaleDateString('pt-br')}</Text>
-          {show && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              is24Hour={false}
-              onChange={onChange}
-              locale='pt-BR'
+          <ScrollView contentContainerStyle={styles.scrollView}>
+            <Text style={styles.tittle}>Dados do Produto{'\n'}</Text>
+            <Text style={styles.text}>PRODUTO{'\n'}</Text>
+            <TextInput
+              style={styles.input}
+              value={productName}
+              onChangeText={text => setProductName(text)}
             />
-          )}
-          <Text style={styles.text}>{'\n'}LOCAL QUE O VIU PELA ULTIMA VEZ{'\n'}</Text>
-          <View style={{height: 200}}>
-            <MapView
-              onPress={handleMapPress}
-              style={{ flex: 1}}
-              initialRegion={{
-                latitude: -6.8883, //Dados Geograficos da Cidade de Cajazeiras
-                longitude: -38.5591,
-                latitudeDelta: 0.08, // Serve como um Zoom
-                longitudeDelta: 0.08, // ...    ...    ...
-              }}>
-              {markerCoords && (
-                <Marker coordinate={markerCoords} />
-              )}
-            </MapView>
-           
-          </View>
-          
+            <Text style={styles.text}>{'\n'}DESCRIÇÃO{'\n'}</Text>
+            <TextInput
+              style={styles.input}
+              value={productDescription}
+              onChangeText={text => setProductDescription(text)}
+              multiline
+            />
+            <Text style={styles.text}>DATA QUE O ENCONTROU</Text>
+            <Button onPress={showDatepicker} text="Informar Data" />
+            {/* date.toLocaleDateString('pt-br') */}
+            <Text>selecionado: {date.toLocaleDateString('pt-br')}</Text>
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                is24Hour={false}
+                onChange={onChange}
+                locale='pt-BR'
+              />
+            )}
+            <Text style={styles.text}>{'\n'}LOCAL QUE O VIU PELA ULTIMA VEZ{'\n'}</Text>
+            <View style={{height: 200}}>
+              <MapView
+                onPress={handleMapPress}
+                style={{ flex: 1}}
+                initialRegion={{
+                  latitude: -6.8883, //Dados Geograficos da Cidade de Cajazeiras
+                  longitude: -38.5591,
+                  latitudeDelta: 0.08, // Serve como um Zoom
+                  longitudeDelta: 0.08, // ...    ...    ...
+                }}>
+                {markerCoords && (
+                  <Marker coordinate={markerCoords} />
+                )}
+              </MapView>
+            
+            </View>
+            
 
-          <ImageUploadField />
+            <ImageUploadField />
+          </ScrollView>
+          
           
         </View>,
       ]}
@@ -155,6 +158,10 @@ const styles = StyleSheet.create({
   datePicker: {
     width: 200,
     marginBottom: 20
+  },
+  scrollView:
+  {
+    paddingBottom: 100
   }
 });
 
