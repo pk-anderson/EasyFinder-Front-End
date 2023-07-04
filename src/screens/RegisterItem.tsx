@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Alert } from 'react-native';
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from '../components/ItemPage';
 import ImageUploadField from '../components/UploadImage';
-import CameraField from '../components/TakePicture'
 import MapView, {Marker, LatLng} from 'react-native-maps';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../components/Button';
+
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../routes';
+
+import { createLostObject } from '../api/lostObject/addLostObject';
 
 
 
@@ -14,10 +18,13 @@ interface Props {
   
 }
 
-const RegisterItemScreen: React.FC<Props> = () => {
+type RegisterItem = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'RegisterItem'>;
+};
+
+function RegisterItemScreen({ navigation }: RegisterItem) {
   const [productName, setProductName] = useState('');
   const [productDescription, setProductDescription] = useState('');
-  const [productLocalization, setProductLocalization] = useState('');
   const [markerCoords, setMarkerCoords] = useState<LatLng | undefined>(undefined);
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
@@ -27,6 +34,43 @@ const RegisterItemScreen: React.FC<Props> = () => {
   const BRMonth = (date.getMonth() +1).toString()
   const BRYear = date.getFullYear.toString()
   const BRFullDate = (BRDay + BRMonth + BRYear)
+
+
+  const [formData, setFormData] = useState({
+    name:'', 
+    isLosted:true, 
+    description: '',
+    location: '',
+    owner: '',
+    objectImage: ''
+  });
+
+
+  const handleSavePress = async () => {
+    try {
+      const dataToSend = { ...formData };
+      let isCreated = await createLostObject(
+        dataToSend.name,
+        dataToSend.isLosted,
+        dataToSend.description,
+        dataToSend.location,
+        dataToSend.owner,
+        dataToSend.objectImage,
+      );
+      if (isCreated.has_error) {
+        return Alert.alert("Falha no Cadastro", isCreated.data);
+      } else {
+        console.log("Teste")
+        navigation.navigate("Dashboard");
+      }
+    } catch (error) {
+      // Trate o erro aqui
+      console.error(error);
+      // Exiba uma mensagem de erro ao usuário, por exemplo:
+      Alert.alert("Erro", "Ocorreu um erro ao processar o cadastro.");
+    }
+  };
+
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -49,6 +93,8 @@ const RegisterItemScreen: React.FC<Props> = () => {
   const handleMapPress = (event: any) => {
     const { coordinate } = event.nativeEvent;
     setMarkerCoords(coordinate);
+    const markerCoordinate = String(coordinate)
+    setFormData({...formData, location: markerCoordinate})
   };
 
   
@@ -57,7 +103,7 @@ const RegisterItemScreen: React.FC<Props> = () => {
     <BaseScreen
       children={[
         <View style={styles.container} key={"topContent"}>
-            <Text style={styles.topText}>Cadastrar Item <Button style={styles.saveBtn} text='Salvar'></Button></Text>
+            <Text style={styles.topText}>Cadastrar Item <Button onPress={handleSavePress} style={styles.saveBtn} text='Salvar'></Button></Text>
           </View>,
         <View key={"BodyContent"} style={styles.body}>
           <ScrollView contentContainerStyle={styles.scrollView}>
@@ -65,15 +111,21 @@ const RegisterItemScreen: React.FC<Props> = () => {
             <Text style={styles.text}>PRODUTO{'\n'}</Text>
             <TextInput
               style={styles.input}
-              value={productName}
-              onChangeText={text => setProductName(text)}
+              value={formData.name}
+              onChangeText={(text) => setFormData({ ...formData, name: text })}
             />
             <Text style={styles.text}>{'\n'}DESCRIÇÃO{'\n'}</Text>
             <TextInput
               style={styles.input}
-              value={productDescription}
-              onChangeText={text => setProductDescription(text)}
+              value={formData.description}
+              onChangeText={(text) => setFormData({ ...formData, description: text })}
               multiline
+            />
+            <TextInput
+              style={styles.hidden}
+              value={formData.objectImage}
+              onChangeText={(text) => setFormData({ ...formData, objectImage: text })}
+              
             />
             <Text style={styles.text}>DATA QUE O ENCONTROU</Text>
             <Button onPress={showDatepicker} text="Informar Data" />
@@ -175,6 +227,10 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap'
     
 
+  },
+  hidden:
+  {
+    display: 'none'
   }
 });
 
