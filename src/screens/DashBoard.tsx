@@ -5,63 +5,37 @@ import BaseScreen from "./BaseScreen";
 import AppTopBar from "../components/AppBarTop";
 import SearchBar from "../components/SearchBar";
 import Item from "../components/Item";
-import copoImg from '../assets/image.png'
-import estojoImg from '../assets/image(1).png'
-import iphoneImg from '../assets/image(2).png'
 import { FlatList, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
 import Button from "../components/Button";
 import { AuthContext } from '../../AuthContext';
 import { listLostObjects } from '../api/user/ListLostObjects';
 
-const mockedData = [
-    {
-        id: 1,
-        title :'Garrafa Termica',
-        content :'Achei uma Garrafinha no Lab de ...',
-        img: copoImg,
-        date: 'Há 5h'
-    },
-    {
-        id: 2,
-        title :'Estojo escolar',
-        content :'Encontrei esse estojo perto do ...',
-        img: estojoImg,
-        date: 'Segunda-Feira'
-    },
-    {
-        id: 3,
-        title :'Iphone 8 Plus',
-        content :'Iphone encontrado perto da ...',
-        img: iphoneImg,
-        date: 'Sexta-Feira'
-    },
-];
-
 const contact = "88993847841"
 const status = "Perdido"
 
 type DashboardScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'Dashboard'>;
+    route:any
 };
 
-export default function DashboardScreen({ navigation }: DashboardScreenProps) {
+export default function DashboardScreen({ route, navigation }: DashboardScreenProps) {
     const keyExtractor = (item: any) => item.id.toString();
     const { token } = useContext(AuthContext);
   
     const handleItemPress = (item: any, status: string, contact: string) => {
       navigation.navigate("LostItem", {
-        title: item.title,
-        status: status,
-        description: item.content,
+        title: item.name,
+        status: (item.isLosted == "true")?"Perdido":"Encontrado",
+        description: item.description,
         contact: contact,
-        imagePath: item.img,
+        imagePath: `https://easy-finder.onrender.com/${item.objectImage}`,
       });
     };
   
     const renderItem = ({ item }: { item: any }) => (
       <TouchableOpacity onPress={() => handleItemPress(item, status, contact)}>
-        <Item key={item.id.toString()} title={item.title} content={item.content} img={item.img} date={item.date} />
+        <Item id={item.id} name={item.name} description={item.description} objectImage={item.objectImage} isLosted={item.isLosted} />
       </TouchableOpacity>
     );
   
@@ -72,7 +46,7 @@ export default function DashboardScreen({ navigation }: DashboardScreenProps) {
           <View style={{ height: 0 }}></View>
           <SearchBar />
         </View>
-        <FlatList keyExtractor={keyExtractor} data={mockedData} renderItem={renderItem} />
+        <FlatList keyExtractor={keyExtractor} data={route.params} renderItem={renderItem} />
       </BaseScreen>
     );
   }

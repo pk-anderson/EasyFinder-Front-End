@@ -51,7 +51,7 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
           </View>,
           <View key={"BodyContent"} style={styles.body}>
             {imagePath ? (
-              <Image source={imagePath} style={styles.lostItemImg} />
+              <Image source={{uri:imagePath}} style={styles.lostItemImg} />
             ) : null}
             <LostItemInfoView>
               <LstItmHeader>
