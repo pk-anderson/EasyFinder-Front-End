@@ -21,7 +21,7 @@ type RegisterItem = {
 };
 
 function RegisterItemScreen({ navigation }: RegisterItem) {
-  const { token } = useContext(AuthContext);
+  const { token, userEmail } = useContext(AuthContext);
   const route = useRoute()
   const params = route.params
 
@@ -53,6 +53,7 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
       if (token === null) {
         // Lógica para tratar o token nulo
       } else {
+        console.log(userEmail)
         let isCreated = await createLostObject(
           dataToSend.name,
           dataToSend.isLosted,

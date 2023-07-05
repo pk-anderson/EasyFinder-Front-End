@@ -22,7 +22,7 @@ type LoginScreenProps = {
 function LoginScreen({ navigation }: LoginScreenProps) {
   const [inputEmail, setEmail] = useState('');
   const [inputPassword, setPassword] = useState('');
-  const { setToken } = useContext(AuthContext);
+  const { setToken, setUserEmail } = useContext(AuthContext);
   
   const handleLoginPress = async () => {
     let isValid = VerifyLoginFields(inputEmail, inputPassword);
@@ -37,6 +37,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
           Alert.alert("Falha no Login", result.data);
         } else {
           setToken(authorization);
+          setUserEmail(inputEmail);
           let itens = await listLostObjects(authorization!)
           console.log(itens)
           console.log(authorization)
