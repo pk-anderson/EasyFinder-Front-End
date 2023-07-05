@@ -4,16 +4,13 @@ export async function listLostObjects(token: string) {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}` 
+          'authorization': `${token}` 
         },
       });
-      console.log(response)
-  
       const data = await response.json();
-      console.log(data)
       return data.data;
     } catch (error) {
-      console.log(error);
+      console.log(error)
       return null;
     }
   }

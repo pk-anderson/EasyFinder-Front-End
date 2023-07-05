@@ -8,6 +8,7 @@ import { RootStackParamList } from '../../routes';
 import { VerifyLoginFields } from '../util/VerifyLoginFields';
 import { userLogin } from '../api/user/Login';
 import { AuthContext } from '../../AuthContext';
+import { listLostObjects } from '../api/user/ListLostObjects';
 
 const logoImage = require('../assets/logo.png');
 
@@ -36,7 +37,10 @@ function LoginScreen({ navigation }: LoginScreenProps) {
           Alert.alert("Falha no Login", result.data);
         } else {
           setToken(authorization);
-          navigation.navigate('Dashboard')
+          let itens = await listLostObjects(authorization!)
+          console.log(itens)
+          console.log(authorization)
+          navigation.navigate('Dashboard', itens)
         }
       }
     } catch (error) {

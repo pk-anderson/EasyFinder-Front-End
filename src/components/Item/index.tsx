@@ -3,22 +3,23 @@ import { styles } from "./style";
 import React from "react";
 
 interface IProps {
-  title: string;
-  content: string;
-  img: ImageSourcePropType;
-  date: string;
+  id:string
+  name: string;
+  description: string;
+  objectImage: string;
+  isLosted:string
 }
 
 export default function Item(props: IProps) {
   return (
     <View style={styles.container}>
-      <Image source={props.img} style={styles.img} />
+      <Image source={{uri:`https://easy-finder.onrender.com/${props.objectImage}`}} style={styles.img} />
       <View style={styles.textContent}>
-        <Text style={{ fontWeight: "bold" }}>{props.title}</Text>
-        <Text>{props.content}</Text>
+        <Text style={{ fontWeight: "bold" }}>{props.name}</Text>
+        <Text>{props.description}</Text>
       </View>
       <View style={styles.dateContainer}>
-        <Text>{props.date}</Text>
+      
       </View>
     </View>
   );

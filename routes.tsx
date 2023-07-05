@@ -10,7 +10,7 @@ export type RootStackParamList = {
     status: string;
     description: string;
     contact: string;
-    imagePath?: ImageSourcePropType;
+    imagePath?: string;
   };
   RegisterItem: undefined;
   Profile: undefined;
