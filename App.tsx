@@ -29,7 +29,7 @@ export default function App() {
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen name="LostItem" component={LostItemScreen} />
         <Stack.Screen name="RegisterItem" component={RegisterItemScreen} />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     </AuthProvider>

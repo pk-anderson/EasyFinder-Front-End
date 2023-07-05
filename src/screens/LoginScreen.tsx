@@ -29,6 +29,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
 
     try {
       let response = await userLogin(inputEmail, inputPassword);
+      console.log(response)
       if (response) {
         let { result, authorization } = response;
 
@@ -36,7 +37,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
           Alert.alert("Falha no Login", result.data);
         } else {
           setToken(authorization);
-          navigation.navigate('Dashboard')
+          navigation.navigate('ProfileScreen', {email: inputEmail})
         }
       }
     } catch (error) {
