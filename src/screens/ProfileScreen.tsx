@@ -6,8 +6,9 @@ import { RootStackParamList } from "../../routes";
 import BaseScreen from "./BaseScreen";
 import SearchBar from "../components/SearchBar";
 import Avatar from "../components/Avatar/avatar";
-import avatarimg from '../assets/avatar.jpg'
+import avatarimg from '../assets/avatar.jpg';
 import Button from '../components/Button';
+import style from '../components/Button/style';
 
 type ProfileScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Dashboard'>;
@@ -25,9 +26,15 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
           <View style={styles.label}>
             <Text style={styles.text}>{'\n'}Nome{'\n'}</Text>
 
-            <Text style={styles.text}>+55 99 9 9999-9999</Text>
+            <View style={styles.img}>
+              <Image source={require('../assets/mobile.png')} />
+              <Text style={styles.text}> +55 99 9 9999-9999</Text>
+            </View>
 
-            <Text style={styles.text}>email@email.com</Text>
+            <View style={styles.img}>
+              <Image source={require('../assets/sms-notification.png')} />
+              <Text style={styles.text}> email@email.com</Text>
+            </View>
           </View>
           <View style={{ height: 0 }}>
           <Button text={'Logout'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={function (): void {
@@ -61,12 +68,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    
     marginBottom: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  img: {
+    flexDirection: 'row',
+  },
   text: {
+    font: 'Poppins',
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 12,
