@@ -30,6 +30,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
 
     try {
       let response = await userLogin(inputEmail, inputPassword);
+      console.log(response)
       if (response) {
         let { result, authorization } = response;
 
@@ -41,6 +42,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
           console.log(itens)
           console.log(authorization)
           navigation.navigate('Dashboard', itens)
+          // navigation.navigate('ProfileScreen', {email: inputEmail})
         }
       }
     } catch (error) {
