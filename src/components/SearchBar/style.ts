@@ -7,6 +7,7 @@ export const style = StyleSheet.create({
         display: 'flex',
         alignContent:'center',
         borderRadius: 12,
+        marginTop: 20,
         paddingRight: 20,
         justifyContent: 'center',
         width: deviceDimensions().width * 0.9,

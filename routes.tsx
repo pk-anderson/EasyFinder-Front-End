@@ -17,4 +17,5 @@ export type RootStackParamList = {
   };
   RegisterItem: undefined;
   Profile: undefined;
+  EditProfile: undefined
 };
