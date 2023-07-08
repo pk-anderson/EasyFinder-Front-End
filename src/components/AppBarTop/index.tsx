@@ -25,8 +25,7 @@ const AppTopBar: React.FC<AppTopBarProps> = ({ navigation }) => {
   };
 
   const handleLogout = () => {
-    // Lógica para realizar o logout
-    console.log('Logout');
+    navigation.navigate('Home')
   };
   
   const handleRegisterItem = () => {

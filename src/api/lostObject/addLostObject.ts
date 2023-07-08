@@ -1,14 +1,20 @@
+import { getUniqueUser } from '../user/getUserByEmail'
+
 export async function createLostObject(
-    name:string, 
-    isLosted:boolean, 
-    description: string,
-    location: string,
-    owner: string,
-    objectImage: string,
-    token: string) {
-    try {
-        let request = await fetch("https://easy-finder.onrender.com/lostObject", {
-      method:"POST",
+  name: string,
+  isLosted: boolean,
+  description: string,
+  location: string,
+  ownerEmail: string,
+  objectImage: string,
+  token: string
+) {
+  try {
+    // Buscar usuário pelo email
+    const user = await getUniqueUser(ownerEmail, token);
+    const owner = user.data.id; // Utiliza o ID do usuário como owner
+    const request = await fetch("https://easy-finder.onrender.com/lostObject", {
+      method: "POST",
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -19,15 +25,14 @@ export async function createLostObject(
         isLosted: isLosted,
         description: description,
         location: location,
-        owner: "477b67f4-0f75-4e3a-adb1-24ca010a50df",
+        owner: owner,
         objectImage: objectImage
       }),
-    })
-    let result = request.json()
-    console.log(result)
-    return result 
-    } catch (error) {
-       console.log(error) 
-    }
-   
+    });
+
+    const result = await request.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 }

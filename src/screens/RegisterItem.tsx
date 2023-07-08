@@ -7,6 +7,7 @@ import MapView, { Marker, LatLng } from 'react-native-maps';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Button from '../components/Button';
 import { AuthContext } from '../../AuthContext';
+import { listLostObjects } from '../api/user/ListLostObjects';
 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes';
@@ -50,8 +51,8 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
     try {
       const dataToSend = { ...formData };
 
-      if (token === null) {
-        // Lógica para tratar o token nulo
+      if (token === null || userEmail === null) {
+        return Alert.alert('Falha no Cadastro');
       } else {
         console.log(userEmail)
         let isCreated = await createLostObject(
@@ -59,15 +60,16 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
           dataToSend.isLosted,
           dataToSend.description,
           dataToSend.location,
-          dataToSend.owner,
+          userEmail,
           dataToSend.objectImage,
           token
         );
         if (isCreated.has_error) {
           return Alert.alert('Falha no Cadastro', isCreated.data);
         } else {
-          console.log('Teste');
-          navigation.navigate('Dashboard');
+          Alert.alert('Item cadastrado com sucesso', isCreated.data);
+          let itens = await listLostObjects(token)
+          navigation.navigate('Dashboard', itens);
         }
       }
     } catch (error) {
