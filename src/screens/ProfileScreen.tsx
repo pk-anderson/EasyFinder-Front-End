@@ -15,6 +15,18 @@ type ProfileScreenProps = {
 };
 
 const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
+  const handleEditProfile = () => {
+    navigation.navigate('EditProfile')
+  };
+
+  const handleLogout = () => {
+    navigation.navigate('Home')
+  };
+
+  const handleDeleteAccount = () => {
+    console.log("deletar conta")
+  };
+
   return (
       <BaseScreen children={[
         <View style={styles.container} key={"topContent"}>
@@ -37,13 +49,11 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
             </View>
           </View>
           <View style={{ height: 0 }}>
-          <Button text={'Logout'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={function (): void {
-            throw new Error('Function not implemented.');
-          } }
+          <Button text={'Editar Perfil'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={handleEditProfile}
           />
-          <Button text={'Delete account'} backgroundColor='#FFFFFF'  textColor='#DF1818' borderColor='#FFFFFF' style={styles.button} onPress={function (): void {
-            throw new Error('Function not implemented.');
-          } }
+          <Button text={'Logout'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={handleLogout}
+          />
+          <Button text={'Delete account'} backgroundColor='#FFFFFF'  textColor='#DF1818' borderColor='#FFFFFF' style={styles.button} onPress={handleDeleteAccount}
           />
           </View>
         </View>
@@ -82,9 +92,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   button: {
-    top: 150,
+    top: 80,
     padding: 12,
-    borderRadius: 20,
+    marginTop:10,
     marginLeft: 80,
     marginRight: 80,
     height: 48

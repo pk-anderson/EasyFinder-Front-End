@@ -13,6 +13,7 @@ import LostItemScreen from './src/screens/LostItemScreen'
 import RegisterItemScreen from './src/screens/RegisterItem';
 import { AuthProvider } from './AuthContext';
 import ProfileScreen from './src/screens/ProfileScreen';
+import EditProfileScreen from './src/screens/EditProfileScreen';
 
 const logoImage = require('./src/assets/logo.png');
 
@@ -30,6 +31,7 @@ export default function App() {
         <Stack.Screen name="LostItem" component={LostItemScreen} />
         <Stack.Screen name="RegisterItem" component={RegisterItemScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     </AuthProvider>
