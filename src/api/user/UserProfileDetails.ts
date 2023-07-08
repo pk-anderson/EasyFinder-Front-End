@@ -1,6 +1,6 @@
-export async function detailUserProfile(token: string | null) {
+export async function detailUserProfile(token: string | null, email:string | null) {
     try {
-      const response = await fetch("https://easy-finder.onrender.com/user", {
+      const response = await fetch(`https://easy-finder.onrender.com/uniqueUser/${email}`, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',

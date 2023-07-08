@@ -14,53 +14,89 @@ import { AuthContext } from '../../AuthContext';
 import { useRoute } from '@react-navigation/native';
 import Button from '../components/Button';
 import style from '../components/Button/style';
+import { ContactBtn, ContactTxt, DescriptionLine, DescriptionText, HeaderSub, HeaderTitle, LostItemInfoView, LstItmHeader, LstItmHeaderInfo, StatusLabel, StatusLine, StatusValue, StatusView } from '../components/ItemPage/components';
+import { Entypo, FontAwesome } from '@expo/vector-icons';
 
 type ProfileScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'ProfileScreen'>;
 };
 
 const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
-  const route = useRoute()
-  const params = route.params
-  const { token } = useContext(AuthContext);
-  const [userData, setUserData] = useState('');
-  const keyExtractor = (item: any) => item.id.toString();
+  const { token, userEmail } = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
+
+  const handleEditProfile = () => {
+    navigation.navigate('EditProfile')
+  };
+
+  const handleLogout = () => {
+    navigation.navigate('Home')
+  };
+
+  const handleDeleteAccount = () => {
+    console.log("deletar conta")
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await detailUserProfile(token);
+      const data = await detailUserProfile(token!, userEmail!);
       setUserData(data);
-      console.log(data);
     }
   
     fetchData()
       .catch(console.error);;
   }, [])
 
-  const renderItem = () => (
-    <TouchableOpacity >
-      <User key={1} name={"User Name"} data={userData[0]}/>
-    </TouchableOpacity>
-  );
-
   return (
-    <BaseScreen>
-      <Image source={avatarimg} style={styles.profilePicture} />
-      <View style={{ height: 0 }} />
-      <FlatList keyExtractor={keyExtractor} data={userData} renderItem={renderItem} />
-    </BaseScreen>
-
-  // const handleEditProfile = () => {
-  //   navigation.navigate('EditProfile')
-  // };
-
-  // const handleLogout = () => {
-  //   navigation.navigate('Home')
-  // };
-
-  // const handleDeleteAccount = () => {
-  //   console.log("deletar conta")
-  // };
+    <>
+    <BaseScreen
+      children={[
+        <View key={"BodyContent"} style={styles.container}>
+          <AppTopBar navigation={navigation} />
+          <Image source={avatarimg} style={styles.profilePicture} />
+          <View style={styles.label}>
+            <Text style={styles.text}>{userData?.name}</Text>
+            <View style={styles.img}>
+              <Image source={require('../assets/mobile.png')} />
+              <Text style={styles.text}>{userData?.phoneNumber}</Text>
+            </View>
+            <View style={styles.img}>
+              <Image source={require('../assets/sms-notification.png')} />
+              <Text style={styles.text}>{userData?.email}</Text>
+            </View>
+            <LstItmHeader>
+               <LstItmHeaderInfo>
+                 <HeaderSub>
+                   <Entypo name="location-pin" size={22} color={"red"} />
+                   Cajazeiras - {userData?.state}
+                   Rua {userData?.street}
+                   Número {userData?.homeNumber}
+                 </HeaderSub>
+               </LstItmHeaderInfo>
+             </LstItmHeader>
+          </View>
+          <View style={{ height: 0 }}>
+          </View>
+        </View>,
+        <View style={styles.container} key={"topContent"}>
+        <Button text={'Editar Perfil'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={handleEditProfile}
+        />
+        <Button text={'Delete account'} backgroundColor='#FFFFFF'  textColor='#DF1818' borderColor='#FFFFFF' style={styles.button} onPress={handleDeleteAccount}
+        />
+        <StatusView>
+          <StatusLine>
+            <ContactBtn>
+              <ContactTxt>
+                <FontAwesome name="whatsapp" size={20} color={"green"} />
+                Entrar em Contato
+              </ContactTxt>
+            </ContactBtn>
+          </StatusLine>
+        </StatusView>
+      </View>
+      ]}
+    />
+  </>
 
   // return (
   //     <BaseScreen children={[
@@ -102,6 +138,20 @@ const styles = StyleSheet.create({
     top: '5%',
     flexDirection: 'column',
   },
+  userImg: {
+    width: 220,
+    height: 220,
+    position: "absolute",
+    left: 65,
+    top: 2,
+  },
+  topText: {
+    position: 'absolute',
+    top: 0,
+    left: 85,
+    color: 'white',
+    fontSize: 30
+  },
   profilePicture: {
     display: 'flex',
     width: 150,
@@ -124,6 +174,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 12,
+  },
+  textBox: {
+    top: 80,
+    padding: 12,
+    marginTop:10,
+    marginLeft: 80,
+    marginRight: 80,
+    height: 48
   },
   button: {
     top: 80,
