@@ -5,9 +5,7 @@ export type RootStackParamList = {
   Login: undefined;
   SignUp: undefined;
   Dashboard: undefined;
-  ProfileScreen: {
-    email: string
-  };
+  ProfileScreen: undefined;
   LostItem: {
     title: string;
     status: string;
@@ -17,5 +15,5 @@ export type RootStackParamList = {
   };
   RegisterItem: undefined;
   Profile: undefined;
-  EditProfile: undefined
+  EditProfile: any
 };

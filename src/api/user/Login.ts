@@ -1,3 +1,5 @@
+import { Alert } from "react-native";
+
 export async function userLogin(email:string, password:string) {
     try {
         let request = await fetch("https://easy-finder.onrender.com/user/login", {
@@ -16,7 +18,7 @@ export async function userLogin(email:string, password:string) {
   
     return { result, authorization }
     } catch (error) {
-       console.log(error) 
+      Alert.alert('Erro', 'Ocorreu um erro ao processar a requisição.');
     }
    
 }

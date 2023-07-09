@@ -26,7 +26,7 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   const [userData, setUserData] = useState(null);
 
   const handleEditProfile = () => {
-    navigation.navigate('EditProfile')
+    navigation.navigate('EditProfile', userData)
   };
 
   const handleLogout = () => {
@@ -34,7 +34,6 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
   };
 
   const handleDeleteAccount = () => {
-    console.log("deletar conta")
   };
 
   useEffect(() => {
@@ -44,7 +43,7 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
     }
   
     fetchData()
-      .catch(console.error);;
+      .catch();
   }, [])
 
   return (

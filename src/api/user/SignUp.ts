@@ -1,3 +1,5 @@
+import { Alert } from "react-native";
+
 export async function userCreate(
     name:string, 
     password:string, 
@@ -24,10 +26,9 @@ export async function userCreate(
       }),
     })
     let result = request.json()
-    console.log(result)
     return result 
     } catch (error) {
-       console.log(error) 
+      Alert.alert('Erro', 'Ocorreu um erro ao processar a requisição.');
     }
    
 }

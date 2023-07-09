@@ -8,9 +8,6 @@ interface IProps {
 }
 
 export default function User(props: IProps) {
-
-  console.log(props.name)
-
   return (
     <Text>{props.name}</Text>
   );

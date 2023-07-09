@@ -12,6 +12,7 @@ import { listLostObjects } from '../api/user/ListLostObjects';
 
 const logoImage = require('../assets/logo.png');
 
+
 type LoginScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Home'>;
 };
@@ -27,7 +28,6 @@ function LoginScreen({ navigation }: LoginScreenProps) {
 
     try {
       let response = await userLogin(inputEmail, inputPassword);
-      console.log(response)
       if (response) {
         let { result, authorization } = response;
 
@@ -37,14 +37,12 @@ function LoginScreen({ navigation }: LoginScreenProps) {
           setToken(authorization);
           setUserEmail(inputEmail);
           let itens = await listLostObjects(authorization!)
-          console.log(itens)
-          console.log(authorization)
           // navigation.navigate('Dashboard', itens)
-          navigation.navigate('ProfileScreen', {email: inputEmail})
+          navigation.navigate('ProfileScreen')
         }
       }
     } catch (error) {
-      console.log(error);
+      Alert.alert('Erro', 'Ocorreu um erro ao processar a requisição.');
     }
   };
 

@@ -10,7 +10,6 @@ export async function listLostObjects(token: string) {
       const data = await response.json();
       return data.data;
     } catch (error) {
-      console.log(error)
       return null;
     }
   }

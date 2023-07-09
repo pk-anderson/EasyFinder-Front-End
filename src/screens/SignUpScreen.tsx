@@ -20,7 +20,6 @@ function formatPhoneNumber(phoneNumber: string): string {
   if (match) {
     return `(${match[1]}) ${match[2]}-${match[3]}`;
   }
-  console.log(phoneNumber)
   return phoneNumber;
 }
 
@@ -39,7 +38,6 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
     try {
       const formattedPhone = formatPhoneNumber(formData.phoneNumber);
       const dataToSend = { ...formData, phoneNumber: formattedPhone };
-      console.log(dataToSend);
       let isCreated = await userCreate(
         dataToSend.name,
         dataToSend.password,
@@ -52,13 +50,9 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
       if (isCreated.has_error) {
         return Alert.alert("Falha no Cadastro", isCreated.data);
       } else {
-        console.log("Teste")
         navigation.navigate("Dashboard");
       }
     } catch (error) {
-      // Trate o erro aqui
-      console.error(error);
-      // Exiba uma mensagem de erro ao usuário, por exemplo:
       Alert.alert("Erro", "Ocorreu um erro ao processar o cadastro.");
     }
   };

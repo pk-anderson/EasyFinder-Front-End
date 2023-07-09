@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import { getUniqueUser } from '../user/getUserByEmail'
 
 export async function createLostObject(
@@ -33,6 +34,6 @@ export async function createLostObject(
     const result = await request.json();
     return result;
   } catch (error) {
-    console.log(error);
+    Alert.alert('Erro', 'Ocorreu um erro ao processar a requisição.');
   }
 }

@@ -13,4 +13,3 @@ export async function detailUserProfile(token: string | null, email:string | nul
       return null;
     }
   }
-  
