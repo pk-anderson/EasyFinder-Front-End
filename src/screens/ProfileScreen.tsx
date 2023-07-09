@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, Alert } from 'react-native';
 import AppTopBar from '../components/AppBarTop';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
@@ -16,6 +16,7 @@ import Button from '../components/Button';
 import style from '../components/Button/style';
 import { ContactBtn, ContactTxt, DescriptionLine, DescriptionText, HeaderSub, HeaderTitle, LostItemInfoView, LstItmHeader, LstItmHeaderInfo, StatusLabel, StatusLine, StatusValue, StatusView } from '../components/ItemPage/components';
 import { Entypo, FontAwesome } from '@expo/vector-icons';
+import { deleteUser } from '../api/user/DeleteUser';
 
 type ProfileScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'ProfileScreen'>;
@@ -29,11 +30,18 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
     navigation.navigate('EditProfile', userData)
   };
 
-  const handleLogout = () => {
-    navigation.navigate('Home')
-  };
+  const handleDeleteAccount = async () => {
+    const isDeleted = await deleteUser(
+      token!,
+      userEmail!
+    );
+    if (isDeleted.has_error) {
+      return Alert.alert("Falha no Cadastro", isDeleted.data);
+    } else {
+      Alert.alert('Sucesso', isDeleted.data);
+      navigation.navigate("Login");
+    }
 
-  const handleDeleteAccount = () => {
   };
 
   useEffect(() => {
@@ -80,9 +88,9 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
         <View style={styles.container} key={"topContent"}>
         <Button text={'Editar Perfil'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={handleEditProfile}
         />
-        <Button text={'Delete account'} backgroundColor='#FFFFFF'  textColor='#DF1818' borderColor='#FFFFFF' style={styles.button} onPress={handleDeleteAccount}
+        <Button text={'Excluir Perfil'} backgroundColor='#FFFFFF' textColor='#DF1818' borderColor='#FFFFFF' style={styles.button} onPress={handleDeleteAccount}
         />
-        <StatusView>
+        {/* <StatusView>
           <StatusLine>
             <ContactBtn>
               <ContactTxt>
@@ -91,7 +99,7 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
               </ContactTxt>
             </ContactBtn>
           </StatusLine>
-        </StatusView>
+        </StatusView> */}
       </View>
       ]}
     />

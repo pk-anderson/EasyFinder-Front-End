@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 import { editUser } from '../api/user/EditUser';
+import ImageUploadField from '../components/UploadImage';
 
 type EditProfileScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'EditProfile'>;
@@ -17,46 +18,45 @@ type EditProfileScreenProps = {
 const EditProfileScreen: React.FC = (route, navigation) => {
   const userData = route?.route?.params;
   const { token, userEmail } = useContext(AuthContext);
+  const { setUserEmail } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     state: '',
     street: '',
-    perfilImage: '',
+    userImage: '',
     homeNumber: '',
     phoneNumber: '',
     password: ''
   });
 
   const handleEditPress = async () => {
-    try {
-      const dataToSend = { ...formData };
+    const dataToSend = { ...formData };
 
-      if (token === null || userEmail === null) {
-        return Alert.alert('Erro na autenticação ou email inexistente');
+    if (token === null || userEmail === null) {
+      return Alert.alert('Erro na autenticação ou email inexistente');
+    } else {
+      let isUpdated = await editUser(
+        dataToSend.name,
+        dataToSend.email,
+        dataToSend.state,
+        dataToSend.street,
+        dataToSend.userImage,
+        dataToSend.homeNumber,
+        dataToSend.phoneNumber,
+        dataToSend.password,
+        token,
+        userEmail
+      );
+      if (isUpdated.has_error) {
+        return Alert.alert("Falha no Cadastro", isUpdated.data);
       } else {
-        let isCreated = await editUser(
-          dataToSend.name,
-          dataToSend.email,
-          dataToSend.state,
-          dataToSend.street,
-          dataToSend.perfilImage,
-          dataToSend.homeNumber,
-          dataToSend.phoneNumber,
-          dataToSend.password,
-          token,
-          userEmail
-        );
-        if (isCreated.has_error) {
-          return Alert.alert('Erro ao Atualizar Informações', isCreated.data);
-        } else {
-          Alert.alert('Informações atualizadas com sucesso', isCreated.data);
-          navigation.navigate('ProfileScreen');
-        }
+        Alert.alert('Informações atualizadas com sucesso', isUpdated.data);
+        setUserEmail(dataToSend.email);
+        //TODO Navigation sem funcionar
+        // navigation.navigate('ProfileScreen');
       }
-    } catch (error) {
-      Alert.alert('Erro', 'Ocorreu um erro ao processar a requisição.');
     }
   };
 
@@ -126,13 +126,9 @@ const EditProfileScreen: React.FC = (route, navigation) => {
               onChangeText={(text) => setFormData({ ...formData, password: text })}
               multiline
             />       
-            <Text style={styles.text}>Foto de Perfil</Text>
-            <TextInput
-              style={styles.hidden}
-              value={userData.perfilImage}
-              placeholder="********"
-              onChangeText={(text) => setFormData({ ...formData, perfilImage: text })}
-            />
+            <View>
+              <ImageUploadField />
+            </View>
             {/* <Text style={styles.text}>{'\n'}LOCAL QUE O VIU PELA ULTIMA VEZ{'\n'}</Text> */}
             {/* <View style={{ height: 200 }}>
               <MapView

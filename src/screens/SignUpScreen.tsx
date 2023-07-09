@@ -50,7 +50,8 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
       if (isCreated.has_error) {
         return Alert.alert("Falha no Cadastro", isCreated.data);
       } else {
-        navigation.navigate("Dashboard");
+        Alert.alert("Cadastro Realizado", isCreated.data);
+        navigation.navigate("Login");
       }
     } catch (error) {
       Alert.alert("Erro", "Ocorreu um erro ao processar o cadastro.");
