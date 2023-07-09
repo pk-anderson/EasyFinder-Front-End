@@ -54,7 +54,6 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
       if (token === null || userEmail === null) {
         return Alert.alert('Falha no Cadastro');
       } else {
-        console.log(userEmail)
         let isCreated = await createLostObject(
           dataToSend.name,
           dataToSend.isLosted,
@@ -73,7 +72,6 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
         }
       }
     } catch (error) {
-      console.error(error);
       Alert.alert('Erro', 'Ocorreu um erro ao processar o cadastro.');
     }
   };
@@ -83,7 +81,6 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
       const currentDate = date;
       setShow(false);
       setDate(currentDate);
-      console.log(date);
     }
   };
 

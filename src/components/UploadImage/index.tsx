@@ -11,7 +11,7 @@ const ImageUploadField: React.FC = () => {
   const handleImageSelect = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      console.log("Permission denied");
+      Alert.alert('Erro', 'Permissão Negada');
       return;
     }
 
@@ -50,7 +50,6 @@ const ImageUploadField: React.FC = () => {
   const openCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== "granted") {
-      console.log("Permission denied");
       return;
     }
 
