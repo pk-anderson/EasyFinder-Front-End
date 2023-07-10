@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Modal, StyleSheet } from 'react-native';
 import menuImg from '../../assets/menu-aberto.png';
 import { deviceDimensions } from "../../global/dimesion";
@@ -6,18 +6,23 @@ import { styles } from './style';
 const logoImage = require('../../assets/logo.png');
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from "../../../routes";
+import { listMyLostObjects } from '../../api/lostObject/ListMyLostObjects';
+import { AuthContext } from '../../../AuthContext';
+import { getUniqueUser } from '../../api/user/getUserByEmail';
+import { listLostObjects } from '../../api/user/ListLostObjects';
 
 type AppTopBarProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'Dashboard'>;
 };
 
-
-
 const AppTopBar: React.FC<AppTopBarProps> = ({ navigation }) => { 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { token, userEmail } = useContext(AuthContext);
 
-  const handleMenuToggle = () => {
+  const handleMenuToggle = async () => {
     setIsMenuOpen(!isMenuOpen);
+    let itens = await listLostObjects(token!)
+    navigation.navigate('Dashboard', itens)
   };
 
   const handleSeeProfile = () => {
@@ -31,7 +36,12 @@ const AppTopBar: React.FC<AppTopBarProps> = ({ navigation }) => {
   const handleRegisterItem = () => {
     navigation.navigate('RegisterItem');
   };
-  
+
+  const handleListMyLostObjects = async () => {
+    let user = await getUniqueUser(userEmail!, token!)
+    let itens = await listMyLostObjects(token!, user?.data.id)
+    navigation.navigate('LostItemByUserScreen', itens)
+  };
 
   return (
     <View style={styles.containerTop}>
@@ -56,7 +66,11 @@ const AppTopBar: React.FC<AppTopBarProps> = ({ navigation }) => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem} onPress={handleRegisterItem}>
-            <Text style={styles.menuItemText}>Cadastrar Item</Text>
+            <Text style={styles.menuItemText}>Cadastrar Objeto Perdido</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItem} onPress={handleListMyLostObjects}>
+            <Text style={styles.menuItemText}>Meus Objetos Cadastrados</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem} onPress={handleLogout}>

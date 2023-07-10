@@ -1,11 +1,11 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
-import { StyleSheet, View, Image, Text, ImageSourcePropType } from "react-native";
+import { StyleSheet, View, Image, Text, ImageSourcePropType, ScrollView } from "react-native";
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from "../components/ItemPage/index";
-import React, {useState} from "react";
-import MapView, {Marker} from 'react-native-maps';
-import { Entypo, AntDesign, FontAwesome } from "@expo/vector-icons";
+import React from "react";
+import MapView from 'react-native-maps';
+import { Entypo, AntDesign} from "@expo/vector-icons";
 import {
   LostItemInfoView,
   LstItmHeaderInfo,
@@ -21,11 +21,7 @@ import {
   DescriptionText,
 } from "../components/ItemPage/components";
 import {
-  DescriptionLine,
-  LocationLine,
-  LocationMap,
-  ContactBtn,
-  ContactTxt,
+  DescriptionLine
 } from "../components/ItemPage/components";
 import { RouteProp } from "@react-navigation/native";
 
@@ -44,6 +40,7 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
 
   return (
     <>
+      <ScrollView contentContainerStyle={styles.container}>
       <BaseScreen
         children={[
           <View style={styles.container} key={"topContent"}>
@@ -92,16 +89,6 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
                 </StatusLine>
                 
               </StatusView>
-              <StatusView>
-                <StatusLine>
-                  <ContactBtn>
-                    <ContactTxt>
-                      <FontAwesome name="whatsapp" size={20} color={"green"} />
-                      Entrar em Contato
-                    </ContactTxt>
-                  </ContactBtn>
-                </StatusLine>
-              </StatusView>
               
             </LostItemInfoView>
             <View style={styles.map}>
@@ -118,6 +105,7 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
           </View>,
         ]}
       />
+    </ScrollView>
     </>
   );
 };

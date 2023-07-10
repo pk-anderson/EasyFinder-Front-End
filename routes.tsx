@@ -6,6 +6,7 @@ export type RootStackParamList = {
   SignUp: undefined;
   Dashboard: undefined;
   ProfileScreen: undefined;
+  LostItemByUserScreen: undefined; 
   LostItem: {
     title: string;
     status: string;

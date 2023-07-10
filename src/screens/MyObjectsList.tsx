@@ -10,33 +10,31 @@ import React, { useContext } from "react";
 import Button from "../components/Button";
 import { AuthContext } from '../../AuthContext';
 import { listLostObjects } from '../api/user/ListLostObjects';
-import { getUniqueUser } from "../api/user/getUserByEmail";
-import { getUserById } from "../api/user/getUserById copy";
+
+const contact = "88993847841"
+const status = "Perdido"
 
 type DashboardScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'Dashboard'>;
     route:any
 };
 
-export default function DashboardScreen({ route, navigation }: DashboardScreenProps) {
+export default function MyObjectsList({ route, navigation }: DashboardScreenProps) {
     const keyExtractor = (item: any) => item.id.toString();
     const { token } = useContext(AuthContext);
   
-    const handleItemPress = async (item: any) => {
-      console.log(item)
-      let user = await getUserById(item.owner!, token!)
-
+    const handleItemPress = (item: any, status: string, contact: string) => {
       navigation.navigate("LostItem", {
         title: item.name,
         status: (item.isLosted == "true")?"Perdido":"Encontrado",
         description: item.description,
-        contact: user?.data.phoneNumber,
+        contact: contact,
         imagePath: `https://easy-finder.onrender.com/${item.objectImage}`,
       });
     };
   
     const renderItem = ({ item }: { item: any }) => (
-      <TouchableOpacity onPress={() => handleItemPress(item)}>
+      <TouchableOpacity onPress={() => handleItemPress(item, status, contact)}>
         <Item id={item.id} name={item.name} description={item.description} objectImage={item.objectImage} isLosted={item.isLosted} />
       </TouchableOpacity>
     );

@@ -105,19 +105,19 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
       children={[
         <View style={styles.container} key={"topContent"}>
           <Text style={styles.topText}>
-            Cadastrar Item <Button onPress={handleSavePress} style={styles.saveBtn} text='Salvar' />
+            <Button onPress={handleSavePress} style={styles.saveBtn} text='Cadastrar Objeto Perdido ' />
           </Text>
         </View>,
        <View key={"BodyContent"} style={styles.body}>
           <ScrollView contentContainerStyle={styles.scrollView}>
-            <Text style={styles.tittle}>Dados do Produto{'\n'}</Text>
-            <Text style={styles.text}>PRODUTO{'\n'}</Text>
+            <Text style={styles.tittle}>Dados do Objeto{'\n'}</Text>
+            <Text style={styles.text}>Objeto{'\n'}</Text>
             <TextInput
               style={styles.input}
               value={formData.name}
               onChangeText={(text) => setFormData({ ...formData, name: text })}
             />
-            <Text style={styles.text}>{'\n'}DESCRIÇÃO{'\n'}</Text>
+            <Text style={styles.text}>{'\n'}Descrição{'\n'}</Text>
             <TextInput
               style={styles.input}
               value={formData.description}
@@ -129,7 +129,7 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
               value={formData.objectImage}
               onChangeText={(text) => setFormData({ ...formData, objectImage: text })}
             />
-            <Text style={styles.text}>DATA QUE O ENCONTROU</Text>
+            <Text style={styles.text}>Data em que o encontrou</Text>
             <Button onPress={showDatepicker} text="Informar Data" />
             <Text>Selecionado: {date.toLocaleDateString('pt-br')}</Text>
             {show && (
@@ -141,7 +141,7 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
                 locale='pt-BR'
               />
             )}
-            <Text style={styles.text}>{'\n'}LOCAL QUE O VIU PELA ULTIMA VEZ{'\n'}</Text>
+            <Text style={styles.text}>{'\n'}Local em que o viu pela primeira vez{'\n'}</Text>
             <View style={{ height: 200 }}>
               <MapView
                 onPress={handleMapPress}

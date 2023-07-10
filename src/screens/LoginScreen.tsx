@@ -37,8 +37,8 @@ function LoginScreen({ navigation }: LoginScreenProps) {
           setToken(authorization);
           setUserEmail(inputEmail);
           let itens = await listLostObjects(authorization!)
-          // navigation.navigate('Dashboard', itens)
-          navigation.navigate('ProfileScreen')
+          navigation.navigate('Dashboard', itens)
+          // navigation.navigate('ProfileScreen')
         }
       }
     } catch (error) {

@@ -4,28 +4,26 @@ import { StyleSheet, View } from "react-native";
 import BaseScreen from "./BaseScreen";
 import AppTopBar from "../components/AppBarTop";
 import SearchBar from "../components/SearchBar";
-import Item from "../components/Item";
 import { FlatList, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
-import Button from "../components/Button";
 import { AuthContext } from '../../AuthContext';
-import { listLostObjects } from '../api/user/ListLostObjects';
+import MyItem from "../components/MyItem";
 import { getUniqueUser } from "../api/user/getUserByEmail";
-import { getUserById } from "../api/user/getUserById copy";
+import { deleteItem } from "../api/lostObject/DeleteItem";
+import { listMyLostObjects } from "../api/lostObject/ListMyLostObjects";
 
-type DashboardScreenProps = {
-    navigation: NativeStackNavigationProp<RootStackParamList, 'Dashboard'>;
+type LostItemByUserScreenProps = {
+    navigation: NativeStackNavigationProp<RootStackParamList, 'LostItemByUserScreen'>;
     route:any
 };
 
-export default function DashboardScreen({ route, navigation }: DashboardScreenProps) {
+export default function LostItemByUserScreen({ route, navigation }: LostItemByUserScreenProps) {
     const keyExtractor = (item: any) => item.id.toString();
-    const { token } = useContext(AuthContext);
-  
-    const handleItemPress = async (item: any) => {
-      console.log(item)
-      let user = await getUserById(item.owner!, token!)
+    const { token, userEmail } = useContext(AuthContext);
 
+    const handleItemPress = async (item: any) => {
+      let user = await getUniqueUser(userEmail!, token!)
+      
       navigation.navigate("LostItem", {
         title: item.name,
         status: (item.isLosted == "true")?"Perdido":"Encontrado",
@@ -34,10 +32,23 @@ export default function DashboardScreen({ route, navigation }: DashboardScreenPr
         imagePath: `https://easy-finder.onrender.com/${item.objectImage}`,
       });
     };
+
+    const handleDeleteItem = async (id: string) => {
+      await deleteItem(id!, token!)
+      let user = await getUniqueUser(userEmail!, token!)
+      let itens = await listMyLostObjects(token!, user?.data.id)
+      navigation.navigate('LostItemByUserScreen', itens)
+    };
+
+    const handleEditItem = async (id: string) => {
+      let user = await getUniqueUser(userEmail!, token!)
+      let itens = await listMyLostObjects(token!, user?.data.id)
+      navigation.navigate('LostItemByUserScreen', itens)
+    };
   
     const renderItem = ({ item }: { item: any }) => (
       <TouchableOpacity onPress={() => handleItemPress(item)}>
-        <Item id={item.id} name={item.name} description={item.description} objectImage={item.objectImage} isLosted={item.isLosted} />
+        <MyItem id={item.id} name={item.name} description={item.description} objectImage={item.objectImage} isLosted={item.isLosted} onDelete={() => handleDeleteItem(item.id)} onEdit={() => handleEditItem(item.id)}  />
       </TouchableOpacity>
     );
   

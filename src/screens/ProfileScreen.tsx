@@ -71,16 +71,6 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
               <Image source={require('../assets/sms-notification.png')} />
               <Text style={styles.text}>{userData?.email}</Text>
             </View>
-            <LstItmHeader>
-               <LstItmHeaderInfo>
-                 <HeaderSub>
-                   <Entypo name="location-pin" size={22} color={"red"} />
-                   Cajazeiras - {userData?.state}
-                   Rua {userData?.street}
-                   Número {userData?.homeNumber}
-                 </HeaderSub>
-               </LstItmHeaderInfo>
-             </LstItmHeader>
           </View>
           <View style={{ height: 0 }}>
           </View>
@@ -90,52 +80,10 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
         />
         <Button text={'Excluir Perfil'} backgroundColor='#FFFFFF' textColor='#DF1818' borderColor='#FFFFFF' style={styles.button} onPress={handleDeleteAccount}
         />
-        {/* <StatusView>
-          <StatusLine>
-            <ContactBtn>
-              <ContactTxt>
-                <FontAwesome name="whatsapp" size={20} color={"green"} />
-                Entrar em Contato
-              </ContactTxt>
-            </ContactBtn>
-          </StatusLine>
-        </StatusView> */}
       </View>
       ]}
     />
   </>
-
-  // return (
-  //     <BaseScreen children={[
-  //       <View style={styles.container} key={"topContent"}>
-  //         <AppTopBar navigation={navigation} />
-      
-  //       </View>,
-  //       <View key={"BodyContent"} style={styles.container}>
-  //         <Image source={avatarimg} style={styles.profilePicture} />
-  //         <View style={styles.label}>
-  //           <Text style={styles.text}>{'\n'}Nome{'\n'}</Text>
-
-  //           <View style={styles.img}>
-  //             <Image source={require('../assets/mobile.png')} />
-  //             <Text style={styles.text}> +55 99 9 9999-9999</Text>
-  //           </View>
-
-  //           <View style={styles.img}>
-  //             <Image source={require('../assets/sms-notification.png')} />
-  //             <Text style={styles.text}> email@email.com</Text>
-  //           </View>
-  //         </View>
-  //         <View style={{ height: 0 }}>
-  //         <Button text={'Editar Perfil'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={handleEditProfile}
-  //         />
-  //         <Button text={'Logout'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={handleLogout}
-  //         />
-  //         <Button text={'Delete account'} backgroundColor='#FFFFFF'  textColor='#DF1818' borderColor='#FFFFFF' style={styles.button} onPress={handleDeleteAccount}
-  //         />
-  //         </View>
-  //       </View>
-  //     ]}      />
   );
 };
 
