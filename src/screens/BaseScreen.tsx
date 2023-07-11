@@ -26,12 +26,12 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     bodyTemplate:{
-        top:'10%',
+        top:'20%',
         borderTopRightRadius:40,
         borderTopLeftRadius:40,
         backgroundColor:'#FFFFFF',
         width: deviceDimensions().width,
-    
+        
         height: deviceDimensions().height,
     }
 })

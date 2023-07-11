@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import AppTopBar from '../components/AppBarTop';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
@@ -60,7 +60,9 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
       children={[
         <View key={"BodyContent"} style={styles.container}>
           <AppTopBar navigation={navigation} />
+       <View style={{display:'flex', alignItems:'center',gap:30}}>
           <Image source={avatarimg} style={styles.profilePicture} />
+          <View style={styles.card}>
           <View style={styles.label}>
             <Text style={styles.text}>{userData?.name}</Text>
             <View style={styles.img}>
@@ -71,24 +73,46 @@ const ProfileScreen = ({ navigation }: ProfileScreenProps) => {
               <Image source={require('../assets/sms-notification.png')} />
               <Text style={styles.text}>{userData?.email}</Text>
             </View>
-            <LstItmHeader>
+            </View>
+            </View>
+            <View style={{}}></View>
+           
+            <LstItmHeader >
                <LstItmHeaderInfo>
-                 <HeaderSub>
+                 <HeaderSub style={{
+                  backgroundColor:'#FFFFFF',
+                  marginTop:'5%',
+                  borderRadius:10,
+                  shadowColor:'black',
+            
+                 
+                  
+                 
+    elevation:50,
+                  }}>
+                    <Text style={{fontWeight:'bold'}}>{`          Endereço\n`}</Text>
                    <Entypo name="location-pin" size={22} color={"red"} />
-                   Cajazeiras - {userData?.state}
-                   Rua {userData?.street}
-                   Número {userData?.homeNumber}
+                   
+                   Cajazeiras - {`  ${userData?.state}\n`}
+                   {`  Rua ${userData?.street}\n`}
+                   <Text style={{
+                    alignContent:'center',
+                
+                   width:'100%',
+                   borderWidth:2,
+                   borderColor:'red'}}>  Número {userData?.homeNumber}</Text>
                  </HeaderSub>
+
                </LstItmHeaderInfo>
              </LstItmHeader>
-          </View>
-          <View style={{ height: 0 }}>
-          </View>
+           
+             </View>
         </View>,
-        <View style={styles.container} key={"topContent"}>
+      
+        <View style={{top:25}} key={"topContent"} >
         <Button text={'Editar Perfil'} backgroundColor='#50924E' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={handleEditProfile}
         />
-        <Button text={'Excluir Perfil'} backgroundColor='#FFFFFF' textColor='#DF1818' borderColor='#FFFFFF' style={styles.button} onPress={handleDeleteAccount}
+        <Button text={'Excluir Perfil'}  backgroundColor='#DF1818' textColor='#FFFFFF' borderColor='#FFFFFF' style={styles.button} onPress={handleDeleteAccount}
         />
         {/* <StatusView>
           <StatusLine>
@@ -145,6 +169,13 @@ const styles = StyleSheet.create({
     top: '5%',
     flexDirection: 'column',
   },
+  card:{
+    top:'35%',
+    backgroundColor:'white',
+    width:'50%',shadowColor:'black',
+    elevation:50,
+    borderRadius:20,
+  },
   userImg: {
     width: 220,
     height: 220,
@@ -165,8 +196,9 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 100,
     overflow: 'hidden',
-    marginLeft: 115,
+
     alignItems: 'center',
+    marginTop:'5%'
   },
   label: {
     marginBottom: 4,
@@ -191,7 +223,8 @@ const styles = StyleSheet.create({
     height: 48
   },
   button: {
-    top: 80,
+    borderRadius:10,
+  
     padding: 12,
     marginTop:10,
     marginLeft: 80,
