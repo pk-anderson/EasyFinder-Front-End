@@ -67,12 +67,14 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
       <Image source={logoImage} style={styles.logo} />
       <Input
         placeholder="Nome de usuário"
+        placeholderTextColor={"#838383"}
         style={styles.input}
         value={formData.name}
         onChangeText={(text) => setFormData({ ...formData, name: text })}
       />
       <Input
         placeholder="Senha"
+        placeholderTextColor={"#838383"}
         secureTextEntry
         style={styles.input}
         value={formData.password}
@@ -80,6 +82,7 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
       />
       <Input
         placeholder="Email"
+        placeholderTextColor={"#838383"}
         style={styles.input}
         keyboardType="email-address"
         value={formData.email}
@@ -87,6 +90,7 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
       />
       <Input
         placeholder="Telefone"
+        placeholderTextColor={"#838383"}
         style={styles.input}
         keyboardType="phone-pad"
         value={formData.phoneNumber}
@@ -94,18 +98,21 @@ function SignUpScreen({ navigation }: SignupScreenProps) {
       />
       <Input
         placeholder="Estado"
+        placeholderTextColor={"#838383"}
         style={styles.input}
         value={formData.state}
         onChangeText={(text) => setFormData({ ...formData, state: text })}
       />
       <Input
         placeholder="Rua"
+        placeholderTextColor={"#838383"}
         style={styles.input}
         value={formData.street}
         onChangeText={(text) => setFormData({ ...formData, street: text })}
       />
       <Input
       placeholder="Número"
+      placeholderTextColor={"#838383"}
       style={styles.input}
       keyboardType="numeric"
       value={formData.homeNumber}
@@ -147,32 +154,52 @@ const styles = StyleSheet.create({
   logo: {
     width: 225,
     height: 42,
-    marginBottom: 25,
+    marginBottom: 50,
   },
   input: {
-    width: 250,
+    width: 300,
     height: 40,
-    backgroundColor: '#d3d3d3',
+    backgroundColor: '#fcfcfc',
     marginBottom: 15,
     paddingHorizontal: 10,
-    borderWidth: 1,
-    borderRadius: 20,
+    fontSize: 18,
+    color:'#686868',
+    borderWidth: 0.3,
+    borderColor:'#9c9c9c',
+    shadowColor: 'rgba(0, 0, 0, 0.8)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
   },
   signupButton: {
     marginTop: 35,
+    height:50,
     backgroundColor: '#50924E',
     width: 300,
+    borderWidth: 0,
+    shadowColor: 'rgba(0, 0, 0, 1)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
   },
   signupButtonText: {
     fontSize: 16,
   },
   loginButton: {
     marginTop: 25,
+    height:50,
     marginBottom: 25,
-    borderWidth: 1,
+    borderWidth: 0.3,
     borderColor: '#50924E',
     backgroundColor: '#FFFFFF',
     width: 300,
+    shadowColor: 'rgba(0, 0, 0, 1)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
   },
   loginButtonText: {
     fontSize: 16,

@@ -56,11 +56,13 @@ function LoginScreen({ navigation }: LoginScreenProps) {
       <Input
         onChangeText={text => setEmail(text)}
         placeholder="E-mail"
+        placeholderTextColor={"#838383"}
         style={styles.input}
       />
       <Input
         onChangeText={text => setPassword(text)}
         placeholder="Senha"
+        placeholderTextColor={"#838383"}
         secureTextEntry
         style={styles.input}
       />
@@ -73,7 +75,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
         textStyle={styles.loginButtonText}
       />
       <Button
-        text="NÃO TEM CONTA? CADASTRE-SE"
+        text="CADASTRE-SE"
         textColor="#00FF00"
         backgroundColor="#FFFFFF"
         onPress={handleSignupPress}
@@ -99,30 +101,53 @@ const styles = StyleSheet.create({
   },
   input: {
     width: 250,
-    height: 40,
-    backgroundColor: '#d3d3d3',
+    height: 50,
+    backgroundColor: '#fcfcfc',
     marginBottom: 25,
     paddingHorizontal: 10,
-    borderWidth: 1,
-    borderRadius: 20,
+    fontSize: 18,
+    color:'#686868',
+    borderWidth: 0.3,
+    borderColor:'#9c9c9c',
+    shadowColor: 'rgba(0, 0, 0, 0.8)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
+
   },
   loginButton: {
     marginTop: 100,
     backgroundColor: '#50924E',
     width: 300,
+    height:50,
+    borderWidth: 0,
+    shadowColor: 'rgba(0, 0, 0, 1)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
   },
   loginButtonText: {
     fontSize: 16,
+    fontWeight:'bold',
   },
   signupButton: {
     marginTop: 25,
-    borderWidth: 1,
+    borderWidth: 0.3,
+    height:50,
     borderColor: '#50924E',
     width: 300,
+    shadowColor: 'rgba(0, 0, 0, 0.8)',
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 15 ,
+    shadowOffset : { width: 1, height: 13},
   },
   signupButtonText: {
     fontSize: 16,
     color: '#50924E',
+    fontWeight:'bold',
   },
 });
 
