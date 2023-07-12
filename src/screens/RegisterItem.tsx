@@ -100,6 +100,10 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
     setFormData({ ...formData, location: markerCoordinate });
   };
 
+  const handleImageSelect = (image: string) => {
+    setFormData({ ...formData, objectImage: image });
+  };
+  
   return (
     <BaseScreen
       children={[
@@ -157,8 +161,8 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
               </MapView>
             </View>
             <View>
-              <ImageUploadField />
-            </View>
+              <ImageUploadField onSelectImage={handleImageSelect}/>
+          </View>
           </ScrollView>
         </View>,
       ]}

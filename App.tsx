@@ -15,6 +15,7 @@ import { AuthProvider } from './AuthContext';
 import ProfileScreen from './src/screens/ProfileScreen';
 import EditProfileScreen from './src/screens/EditProfileScreen';
 import LostItemByUserScreen from './src/screens/LostItemByUserScreen';
+import EditUserItemScreen from './src/screens/EditUserItemScreen';
 
 const logoImage = require('./src/assets/logo.png');
 
@@ -35,6 +36,7 @@ export default function App() {
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="EditProfile" component={EditProfileScreen} />
         <Stack.Screen name="LostItemByUserScreen" component={LostItemByUserScreen} />
+        <Stack.Screen name="EditUserItemScreen" component={EditUserItemScreen} />
       </Stack.Navigator>
     </NavigationContainer>
     </AuthProvider>

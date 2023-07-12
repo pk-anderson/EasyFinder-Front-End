@@ -23,7 +23,6 @@ export default function DashboardScreen({ route, navigation }: DashboardScreenPr
     const { token } = useContext(AuthContext);
   
     const handleItemPress = async (item: any) => {
-      console.log(item)
       let user = await getUserById(item.owner!, token!)
 
       navigation.navigate("LostItem", {

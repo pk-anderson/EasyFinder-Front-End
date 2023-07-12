@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert, TextInput, ScrollView } from 'react-native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
@@ -31,6 +31,19 @@ const EditProfileScreen: React.FC = (route, navigation) => {
     password: ''
   });
 
+  useEffect(() => {
+    setFormData({
+      name: userData.name,
+      email: userData.email,
+      state: userData.state,
+      street: userData.street,
+      userImage: userData.userImage,
+      homeNumber: userData.homeNumber,
+      phoneNumber: userData.phoneNumber,
+      password: userData.password
+    });
+  }, []);
+
   const handleEditPress = async () => {
     const dataToSend = { ...formData };
 
@@ -50,7 +63,7 @@ const EditProfileScreen: React.FC = (route, navigation) => {
         userEmail
       );
       if (isUpdated.has_error) {
-        return Alert.alert("Falha no Cadastro", isUpdated.data);
+        return Alert.alert("Falha ao Editar", isUpdated.data);
       } else {
         Alert.alert('Informações atualizadas com sucesso', isUpdated.data);
         setUserEmail(dataToSend.email);
@@ -60,12 +73,16 @@ const EditProfileScreen: React.FC = (route, navigation) => {
     }
   };
 
+  const handleImageSelect = (image: string) => {
+    setFormData({ ...formData, userImage: image });
+  }; 
+
   return (
     <BaseScreen
       children={[
         <View style={styles.container} key={"topContent"}>
           <Text style={styles.topText}>
-            Editar Usuário <Button onPress={handleEditPress} style={styles.saveBtn} text='Salvar' />
+            <Button onPress={handleEditPress} style={styles.saveBtn} text='Editar Usuário' />
           </Text>
         </View>,
        <View key={"BodyContent"} style={styles.body}>
@@ -127,7 +144,7 @@ const EditProfileScreen: React.FC = (route, navigation) => {
               multiline
             />       
             <View>
-              <ImageUploadField />
+              <ImageUploadField onSelectImage={handleImageSelect}/>
             </View>
             {/* <Text style={styles.text}>{'\n'}LOCAL QUE O VIU PELA ULTIMA VEZ{'\n'}</Text> */}
             {/* <View style={{ height: 200 }}>

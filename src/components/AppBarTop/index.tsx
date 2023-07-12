@@ -22,7 +22,6 @@ const AppTopBar: React.FC<AppTopBarProps> = ({ navigation }) => {
   const handleMenuToggle = async () => {
     setIsMenuOpen(!isMenuOpen);
     let itens = await listLostObjects(token!)
-    navigation.navigate('Dashboard', itens)
   };
 
   const handleSeeProfile = () => {

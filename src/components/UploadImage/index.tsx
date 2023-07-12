@@ -1,38 +1,37 @@
-import React, { useState } from "react";
-import { View, Image, TouchableOpacity, Text, Alert } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import { FontAwesome } from '@expo/vector-icons'; 
-import { style } from './style'
+import React, { useState } from 'react';
+import { View, Image, TouchableOpacity, Text, Alert } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { FontAwesome } from '@expo/vector-icons';
+import { style } from './style';
 
-const ImageUploadField: React.FC = () => {
+interface ImageUploadFieldProps {
+  onSelectImage: (image: string) => void;
+}
+
+const ImageUploadField: React.FC<ImageUploadFieldProps> = ({ onSelectImage }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
 
   const handleImageSelect = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
+    if (status !== 'granted') {
       Alert.alert('Erro', 'Permissão Negada');
       return;
     }
 
-    Alert.alert(
-      "Selecione uma imagem",
-      "Escolha a origem da imagem:",
-      [
-        {
-          text: "Galeria",
-          onPress: () => openImagePicker(),
-        },
-        {
-          text: "Câmera",
-          onPress: () => openCamera(),
-        },
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
-      ]
-    );
+    Alert.alert('Selecione uma imagem', 'Escolha a origem da imagem:', [
+      {
+        text: 'Galeria',
+        onPress: () => openImagePicker(),
+      },
+      {
+        text: 'Câmera',
+        onPress: () => openCamera(),
+      },
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+    ]);
   };
 
   const openImagePicker = async () => {
@@ -44,12 +43,13 @@ const ImageUploadField: React.FC = () => {
 
     if (!result.cancelled) {
       setSelectedImage(result.uri);
+      onSelectImage(result.uri); // Chama a função para atualizar o estado no componente pai
     }
   };
 
   const openCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== "granted") {
+    if (status !== 'granted') {
       return;
     }
 
@@ -60,6 +60,7 @@ const ImageUploadField: React.FC = () => {
 
     if (!result.cancelled) {
       setSelectedImage(result.uri);
+      onSelectImage(result.uri); // Chama a função para atualizar o estado no componente pai
     }
   };
 
@@ -68,11 +69,10 @@ const ImageUploadField: React.FC = () => {
       {selectedImage ? (
         <Image source={{ uri: selectedImage }} style={style.image} />
       ) : (
-        <TouchableOpacity
-          style={style.uploadButton}
-          onPress={handleImageSelect}
-        >
-          <Text style={style.uploadButtonText}><FontAwesome name="picture-o" size={24} color="white" /> Adicionar Imagem</Text>
+        <TouchableOpacity style={style.uploadButton} onPress={handleImageSelect}>
+          <Text style={style.uploadButtonText}>
+            <FontAwesome name="picture-o" size={24} color="white" /> Adicionar Imagem
+          </Text>
         </TouchableOpacity>
       )}
     </View>

@@ -11,6 +11,7 @@ import MyItem from "../components/MyItem";
 import { getUniqueUser } from "../api/user/getUserByEmail";
 import { deleteItem } from "../api/lostObject/DeleteItem";
 import { listMyLostObjects } from "../api/lostObject/ListMyLostObjects";
+import { getObjectById } from "../api/lostObject/ListMyLostObjects copy";
 
 type LostItemByUserScreenProps = {
     navigation: NativeStackNavigationProp<RootStackParamList, 'LostItemByUserScreen'>;
@@ -26,7 +27,7 @@ export default function LostItemByUserScreen({ route, navigation }: LostItemByUs
       
       navigation.navigate("LostItem", {
         title: item.name,
-        status: (item.isLosted == "true")?"Perdido":"Encontrado",
+        status: (item.isLosted)?"Perdido":"Encontrado",
         description: item.description,
         contact: user?.data.phoneNumber,
         imagePath: `https://easy-finder.onrender.com/${item.objectImage}`,
@@ -41,9 +42,8 @@ export default function LostItemByUserScreen({ route, navigation }: LostItemByUs
     };
 
     const handleEditItem = async (id: string) => {
-      let user = await getUniqueUser(userEmail!, token!)
-      let itens = await listMyLostObjects(token!, user?.data.id)
-      navigation.navigate('LostItemByUserScreen', itens)
+      const item = await getObjectById(token!, id!)
+      navigation.navigate('EditUserItemScreen', {item})
     };
   
     const renderItem = ({ item }: { item: any }) => (

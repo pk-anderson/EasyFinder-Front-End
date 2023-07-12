@@ -23,7 +23,6 @@ export async function deleteUser(
     const result = await request.json();
     return result;
   } catch (error) {
-    console.log(error)
     Alert.alert('Erro', 'Ocorreu um erro ao processar a requisição.');
   }
 }
