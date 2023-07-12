@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, View, Image, TextInput, Alert } from 'react-native';
+import { StyleSheet, View, Image, TextInput, Alert,ActivityIndicator } from 'react-native';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import FooterText from '../components/FooterText';
@@ -20,6 +20,7 @@ type LoginScreenProps = {
 function LoginScreen({ navigation }: LoginScreenProps) {
   const [inputEmail, setEmail] = useState('');
   const [inputPassword, setPassword] = useState('');
+  const [isVisible,setVisible] = useState(false)
   const { setToken, setUserEmail } = useContext(AuthContext);
   
   const handleLoginPress = async () => {
@@ -27,7 +28,9 @@ function LoginScreen({ navigation }: LoginScreenProps) {
     if (isValid === undefined) return isValid;
 
     try {
+      setVisible(true)
       let response = await userLogin(inputEmail, inputPassword);
+      setVisible(false)
       if (response) {
         let { result, authorization } = response;
 
@@ -66,6 +69,7 @@ function LoginScreen({ navigation }: LoginScreenProps) {
         secureTextEntry
         style={styles.input}
       />
+      {isVisible ? <ActivityIndicator size='large' color='#0000ff' /> :null}
       <Button
         text="ENTRAR"
         textColor="#FFFFFF"
