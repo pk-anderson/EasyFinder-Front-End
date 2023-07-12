@@ -212,6 +212,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   scrollView: {
+    height:900,
     paddingBottom: 100,
   },
   imageCamView: {
