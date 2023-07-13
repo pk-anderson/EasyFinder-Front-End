@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
-import { StyleSheet, View, Image, Text, ImageSourcePropType, ScrollView } from "react-native";
+import { StyleSheet, View, Image, Text, ImageSourcePropType, ScrollView, Touchable, TouchableOpacityComponent, TouchableOpacity } from "react-native";
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from "../components/ItemPage/index";
 import React from "react";
@@ -24,6 +24,7 @@ import {
   DescriptionLine
 } from "../components/ItemPage/components";
 import { RouteProp } from "@react-navigation/native";
+import Button from "../components/Button";
 
 type LostItemScreenProps = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'LostItem'>;
@@ -36,6 +37,8 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
   const handleBack = () => {
     navigation.navigate('Home');
   };
+
+  
 
 
   return (
@@ -72,7 +75,9 @@ const LostItemScreen = ({ navigation, route }: LostItemScreenProps) => {
               <StatusView>
                 <StatusLine>
                   <StatusLabel>Contato</StatusLabel>
+      
                   <StatusValue>{contact}</StatusValue>
+              
                 </StatusLine>
               </StatusView>
               <StatusView>

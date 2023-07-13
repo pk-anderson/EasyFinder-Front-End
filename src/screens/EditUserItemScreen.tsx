@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, TextInput, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Alert, TextInput, ScrollView, Touchable, TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
 import { AuthContext } from '../../AuthContext';
@@ -103,7 +103,7 @@ const EditUserItemScreen: React.FC = (route, navigation) => {
       children={[
         <View style={styles.container} key={"topContent"}>
           <Text style={styles.topText}>
-            <Button onPress={handleEditPress} style={styles.saveBtn} text='Editar Item' />
+            <Text>Editar Item</Text>
           </Text>
         </View>,
        <View key={"BodyContent"} style={styles.body}>
@@ -145,7 +145,29 @@ const EditUserItemScreen: React.FC = (route, navigation) => {
               onChangeText={(text) => setFormData({ ...formData, objectImage: text })}
             />
             <Text style={styles.text}>Data em que o encontrou</Text>
-            <Button onPress={showDatepicker} text="Informar Data" />
+            <TouchableOpacity
+            style={{
+              alignSelf:'center',
+              marginTop:'3%',
+              width:'100%',
+              height:'5%',
+              borderRadius:10,
+              alignItems:'center',
+              justifyContent:'center',
+              backgroundColor:'#229E82',
+            }}
+            onPress={showDatepicker}>
+              <Text
+              style={{
+                top:'3%',
+                color:'white',
+                fontSize:18,
+                alignItems:'center',
+                justifyContent:'center'
+              }}
+              >Informar Data</Text>
+            </TouchableOpacity>
+
             <Text>Selecionado: {date.toLocaleDateString('pt-br')}</Text>
             {show && (
               <DateTimePicker
@@ -174,6 +196,30 @@ const EditUserItemScreen: React.FC = (route, navigation) => {
             <View>
               <ImageUploadField onSelectImage={handleImageSelect}/>
             </View>
+            <TouchableOpacity 
+            style={{
+              alignSelf:'center',
+              marginTop:'3%',
+              width:'100%',
+              height:'5%',
+              borderRadius:10,
+              alignItems:'center',
+              justifyContent:'center',
+              backgroundColor:'#229E82',
+            }}
+            onPress={handleEditPress}>
+              <Text
+              style={{
+
+                top:'1%',
+                color:'white',
+                fontSize:18,
+            
+                alignItems:'center',
+                justifyContent:'center'
+              }}
+              >Salvar</Text>
+            </TouchableOpacity>
           </ScrollView>
         </View>,
         ]}
@@ -205,6 +251,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     paddingBottom: 100,
+    height:950
   },
   body: {
     flex: 1,

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, TextInput, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Alert, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../routes";
 import { AuthContext } from '../../AuthContext';
@@ -46,7 +46,7 @@ const EditProfileScreen: React.FC = (route, navigation) => {
 
   const handleEditPress = async () => {
     const dataToSend = { ...formData };
-
+    console.log(dataToSend)
     if (token === null || userEmail === null) {
       return Alert.alert('Erro na autenticação ou email inexistente');
     } else {
@@ -82,7 +82,7 @@ const EditProfileScreen: React.FC = (route, navigation) => {
       children={[
         <View style={styles.container} key={"topContent"}>
           <Text style={styles.topText}>
-            <Button onPress={handleEditPress} style={styles.saveBtn} text='Editar Usuário' />
+          Editar Dados
           </Text>
         </View>,
        <View key={"BodyContent"} style={styles.body}>
@@ -144,6 +144,7 @@ const EditProfileScreen: React.FC = (route, navigation) => {
               multiline
             />       
             <View>
+              <Text style={styles.text}>Adicione Uma Imagem</Text>
               <ImageUploadField onSelectImage={handleImageSelect}/>
             </View>
             {/* <Text style={styles.text}>{'\n'}LOCAL QUE O VIU PELA ULTIMA VEZ{'\n'}</Text> */}
@@ -164,6 +165,25 @@ const EditProfileScreen: React.FC = (route, navigation) => {
             {/* <View>
               <ImageUploadField />
             </View> */}
+              <TouchableOpacity onPress={handleEditPress} style={{
+                      alignSelf:'center',
+                      marginTop:'3%',
+                      width:'100%',
+                      height:'5%',
+                      borderRadius:10,
+                      alignItems:'center',
+                      justifyContent:'center',
+                      backgroundColor:'#229E82',
+              }}>
+                <Text style={{
+                     top:'3%',
+                     color:'white',
+                     fontSize:15,
+                 
+                     alignItems:'center',
+                     justifyContent:'center'
+                }}>Editar Usuário</Text>
+              </TouchableOpacity>
           </ScrollView>
         </View>,
         ]}
@@ -182,7 +202,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   saveBtn: {
-    position: 'absolute',
+  
     top: 2,
     color: "#1e1e1e"
   },
@@ -194,6 +214,7 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   scrollView: {
+    height:950,
     paddingBottom: 100,
   },
   body: {

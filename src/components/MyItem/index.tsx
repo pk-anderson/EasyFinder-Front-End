@@ -20,6 +20,13 @@ export default function MyItem(props: IProps) {
         <Text style={{ fontWeight: "bold" }}>{props.name}</Text>
         <Text>{props.description}</Text>
       </View>
+      <View style={
+        {
+          display:'flex',
+          flexDirection:'row',
+          marginRight:'5%'
+        }
+      }>
       <View style={styles.dateContainer}></View>
       <TouchableOpacity onPress={props.onDelete} style={styles.deleteButton}>
         <Text style={styles.deleteButtonText}>X</Text>
@@ -27,6 +34,7 @@ export default function MyItem(props: IProps) {
       <TouchableOpacity onPress={props.onEdit} style={styles.editButton}>
         <Text style={styles.editText}>E</Text>
       </TouchableOpacity>
+      </View>
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import BaseScreen from "./BaseScreen";
 import ItemTopBar from '../components/ItemPage';
 import ImageUploadField from '../components/UploadImage';
@@ -109,7 +109,7 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
       children={[
         <View style={styles.container} key={"topContent"}>
           <Text style={styles.topText}>
-            <Button onPress={handleSavePress} style={styles.saveBtn} text='Cadastrar Objeto Perdido ' />
+           Cadastrar Objeto
           </Text>
         </View>,
        <View key={"BodyContent"} style={styles.body}>
@@ -134,7 +134,22 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
               onChangeText={(text) => setFormData({ ...formData, objectImage: text })}
             />
             <Text style={styles.text}>Data em que o encontrou</Text>
-            <Button onPress={showDatepicker} text="Informar Data" />
+            <TouchableOpacity onPress={showDatepicker}
+            style={{
+              
+                alignSelf:'center',
+                marginTop:'3%',
+                width:'100%',
+                height:'6%',
+                borderRadius:10,
+                alignItems:'center',
+                justifyContent:'center',
+                backgroundColor:'#229E82',
+              
+            }}
+            >
+              <Text style={styles.textbutons}>Informar Data</Text>
+            </TouchableOpacity>
             <Text>Selecionado: {date.toLocaleDateString('pt-br')}</Text>
             {show && (
               <DateTimePicker
@@ -160,8 +175,31 @@ function RegisterItemScreen({ navigation }: RegisterItem) {
                 {markerCoords && <Marker coordinate={markerCoords} />}
               </MapView>
             </View>
-            <View>
+            <View style={{
+              marginTop:'2%'
+            }}>
+              <Text style={styles.text}>Selecione uma Imagem do Objeto</Text>
               <ImageUploadField onSelectImage={handleImageSelect}/>
+              <TouchableOpacity onPress={handleSavePress} style={{
+                alignSelf:'center',
+                marginTop:'3%',
+                width:'100%',
+                height:'20%',
+                borderRadius:10,
+                alignItems:'center',
+                justifyContent:'center',
+                backgroundColor:'#229E82',
+              }}>
+                <Text style={{
+           
+                  top:'3%',
+                  color:'white',
+                  fontSize:18,
+              
+                  alignItems:'center',
+                  justifyContent:'center'
+                }}>Cadastrar Objeto Perdido</Text>
+              </TouchableOpacity>
           </View>
           </ScrollView>
         </View>,
@@ -175,6 +213,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 0,
     marginBottom: -20,
+  },
+  textbutons:{
+    top:'3%',
+    color:'white',
+    fontSize:18,
+    alignItems:'center',
+    justifyContent:'center'
   },
   body: {
     flex: 1,
@@ -203,7 +248,7 @@ const styles = StyleSheet.create({
   topText: {
     position: 'absolute',
     top: 0,
-    left: 100,
+    alignSelf:'center',
     color: 'white',
     fontSize: 30
   },
@@ -212,7 +257,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   scrollView: {
-    height:900,
+    height:950,
     paddingBottom: 100,
   },
   imageCamView: {

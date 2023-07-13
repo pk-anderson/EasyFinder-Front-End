@@ -34,8 +34,10 @@ export default function MyObjectsList({ route, navigation }: DashboardScreenProp
     };
   
     const renderItem = ({ item }: { item: any }) => (
-      <TouchableOpacity onPress={() => handleItemPress(item, status, contact)}>
+      <TouchableOpacity onPress={() => handleItemPress(item, status, contact)} >
+   
         <Item id={item.id} name={item.name} description={item.description} objectImage={item.objectImage} isLosted={item.isLosted} />
+   
       </TouchableOpacity>
     );
   

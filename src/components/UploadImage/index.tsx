@@ -50,7 +50,7 @@ const ImageUploadField: React.FC<ImageUploadFieldProps> = ({ onSelectImage }) =>
   const openCamera = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {
-      return;
+      return onSelectImage;
     }
 
     const result = await ImagePicker.launchCameraAsync({

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     bodyTemplate:{
-        top:'20%',
+        top:'15%',
         borderTopRightRadius:40,
         borderTopLeftRadius:40,
         backgroundColor:'#FFFFFF',
